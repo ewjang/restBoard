@@ -1,0 +1,62 @@
+package com.jew.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.jew.domain.Book;
+import com.jew.domain.Member;
+import com.jew.mapper.MemberMapper;
+import com.jew.service.MemberService;
+
+
+@Controller
+public class MemberController {
+	
+	@Autowired
+	MemberService serivce;
+	
+	private final ApplicationContext applicationContext;
+	
+	public  MemberController(ApplicationContext applicationContext) {
+		this.applicationContext=applicationContext;
+	}
+	
+	@GetMapping("/member/bean")
+	@ResponseBody
+	public String bean() {
+		return "bean: "+applicationContext.getBean(MemberMapper.class);
+	}
+	
+	@RequestMapping(value="/member/regist", method = RequestMethod.POST)
+	public String register(Member member) throws Exception {
+		
+		System.out.println("userId 출력");
+		
+		serivce.register(member);
+		/*
+		 * 
+		 * ModelAndView mv=new ModelAndView(); mv.setViewName("views/exas");
+		 * mv.addObject("userId", member.getUserId()); mv.addObject("userName",
+		 * member.getUserName()); mv.addObject("userHobby", member.getHobby());
+		 * mv.addObject("userBirth", member.getUserBirth()); mv.addObject("userMail",
+		 * member.getUserMail()); mv.addObject("userRegDate", member.getRegDate());
+		 */
+		
+		return "login";
+	}
+	
+	@RequestMapping(value="/member/book", method = RequestMethod.POST)
+	public String register(Book book) throws Exception {
+		
+		System.out.println("book 출력");
+
+		
+		return "login";
+	}
+		
+}
