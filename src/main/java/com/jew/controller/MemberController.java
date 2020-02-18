@@ -35,7 +35,7 @@ public class MemberController {
 	@RequestMapping(value="/member/regist", method = RequestMethod.POST)
 	public String register(Member member) throws Exception {
 		
-		System.out.println("userId 출력");
+		System.out.println("userId ");
 		
 		serivce.register(member);
 		/*
@@ -53,7 +53,7 @@ public class MemberController {
 	@RequestMapping(value="/member/book", method = RequestMethod.POST)
 	public String register(Book book) throws Exception {
 		
-		System.out.println("book 출력");
+		System.out.println("book ");
 
 		
 		return "login";

@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-		<title>회원가입 화면</title>
+		<title>Member Registration</title>
 </head>
 
 

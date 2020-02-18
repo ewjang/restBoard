@@ -4,7 +4,7 @@
 <html>
 <head>
 		<meta charset="UTF-8">
-		<title>로그인 화면</title>
+		<title>Login</title>
 </head>
 <body>
 
@@ -15,24 +15,25 @@
 <br>
 <br>
 	<div align="center">
-		<table>
-			
-			
+		<form action="/login/access" method="POST">
 		
-			<tr>
-				<td><label for="userId">userId</label></td>
-				<td><input type="text" value="jew8960" id="userId"></td>
-			</tr>
-			<tr>
-				<td><label for="password">password</label></td>
-				<td><input type="text" value="1234" id="password"></td>
-			</tr>
-			
-		</table>
-				<br>
-				<br>
-			    <button style="color: white;background: green;">로그인</button>
-				<button style="color: white;background: green;" onclick="location.href='/memberPageGo'">회원가입</button>
+			<table>
+				<tr>
+					<td><label for="userId">userId</label></td>
+					<td><input type="text" value="jew8960" name="userId"></td>
+				</tr>
+				<tr>
+					<td><label for="password">password</label></td>
+					<td><input type="text" value="1234" name="userPw"></td>
+				</tr>
+				
+			</table>
+					<br>
+					<br>
+				    <button style="color: white;background: green;">로그인</button>
+		</form>			
+		
+				<button style="color: white;background: green;" onclick="location.href='/views/memberPageGo'">회원가입</button>
 	</div>
 
 </body>
