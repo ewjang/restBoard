@@ -4,6 +4,6 @@ import com.jew.domain.Member;
 
 public interface LoginMapper {
 	
-	public void match(Member member) throws Exception; 
+	public Member match(String userId) throws Exception; 
 	
 }

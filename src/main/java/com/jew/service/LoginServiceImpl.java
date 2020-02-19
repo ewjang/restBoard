@@ -13,10 +13,11 @@ public class LoginServiceImpl implements LoginService{
 	private LoginMapper mapper;
 	
 	@Override
-	public void match(Member member) throws Exception {
+	public Member match(String userId) throws Exception {
 		
-		mapper.match(member);
 		
+		
+		return mapper.match(userId);
 	}
 	
 }

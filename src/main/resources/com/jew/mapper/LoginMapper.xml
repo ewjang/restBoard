@@ -6,7 +6,8 @@
 
 	<select id="match" resultType="com.jew.domain.Member">
 	select user_id,
-		   user_pw
+		   user_pw,
+		   user_name
 	from member
 	where user_id=#{userId}
 	

@@ -1,7 +1,10 @@
 package com.jew.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.jew.domain.Member;
@@ -14,25 +17,26 @@ public class LoginController {
 	LoginService service;
 		
 	@RequestMapping(value="/login/access")
-	public String userAccess(Member member) throws Exception{
-		
-		System.out.println(member.getUserId());
-		System.out.println(member.getUserPw());
-		
+	public String userAccess(Member member, Model model) throws Exception{
+
 		//view에서 넘어온 값 저장
 		String accessId=member.getUserId();
 		String accessPw=member.getUserPw();
-		//DB조회 서비스 생성 넘어온 값과 매칭 시킴..
+		
 		
 		if(accessId == null || accessPw == null) {
 			return "login";
 		}
 		
-		service.match(member);
+		//DB조회 서비스 생성 넘어온 값과 매칭 시킴..
+		Member mem = service.match(accessId);
+
+		String chkId=mem.getUserId();
+		String chkPw=mem.getUserPw();
+		String chkNm=mem.getUserName();
 		
-		//비교
-		if((accessId == member.getUserId()) && (accessPw == member.getUserPw())) {
-			System.out.println("로그인 했습니다.");
+		if((accessId.equals(chkId)) && (accessPw.equals(chkPw))) {
+			System.out.println(chkNm+"님이 로그인 했습니다.");
 			return "boardList";
 		}else {
 			System.out.println("아이디/패스워드가 정확하지 않습니다. 로그인 실패하였습니다.");
