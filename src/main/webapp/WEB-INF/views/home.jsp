@@ -4,26 +4,49 @@
 
 <head>
 	<title>Home</title>
+	
+	<style>
+		.nav{
+			height : 70px;
+			display : flex;
+			border-bottom : 1px solid black;
+			align-items : center;
+		}
+		
+		.nav-right-items{
+			margin-left : auto;
+			display :flex;
+		
+		}
+		
+		.nav-item{
+			margin-left : 10px;
+		}
+
+	</style>
 </head>
 
 <body>
 <P>  The time on the server is ${serverTime}. </P>
 
-<h1 align="center">
-	메인화면  
-</h1>
+		<div align="center">
+			<h1>메인화면 </h1>
+		</div>
 
-	<div align="center">
-		<table>
-			<tr>		
-				<td><a href="/views/loginPageGo">로그인</a></td>
-				<td><a href="/views/memberPageGo">회원가입</a></td>			
-			</tr>
-		</table>
+	<div class="nav">
+		<div class="nav-right-items">	
+			<div class="nav-item">		
+				<a href="/views/loginPageGo" style="text-decoration:none">로그인</a>
+			</div>
+			<div class="nav-item">	
+				<a href="/views/memberPageGo" style="text-decoration:none">회원가입</a>			
+			</div>
+			<div class="nav-item">
+				<a href="/board/list" style="text-decoration:none">게시판목록</a>
+			</div>
+		</div>	
 	</div>
-<hr>
-<br>
-<br>
+
 
 </body>
 </html>

@@ -5,16 +5,55 @@
 <head>
 		<meta charset="UTF-8">
 		<title>Login</title>
+		
+	<style>
+		.nav{
+			height : 70px;
+			display : flex;
+			border-bottom : 1px solid black;
+			align-items : center;
+		}
+		
+		.nav-right-items{
+			margin-left : auto;
+			display :flex;
+		
+		}
+		
+		.nav-item{
+			margin-left : 10px;
+		}
+		
+		
+		.main{
+			margin-top : 230px;
+			align-items : center;
+		}
+	
+	</style>
 </head>
 <body>
 
 <h1 align="center">
 	로그인 화면  
 </h1>
-<hr>
-<br>
-<br>
-	<div align="center">
+
+	<div class="nav">
+		<div class="nav-right-items">	
+			<div class="nav-item">		
+				<a href="/views/loginPageGo" style="text-decoration:none">로그인</a>
+			</div>
+			<div class="nav-item">	
+				<a href="/views/memberPageGo" style="text-decoration:none">회원가입</a>			
+			</div>
+			<div class="nav-item">
+				<a href="/board/list" style="text-decoration:none">게시판목록</a>
+			</div>
+		</div>	
+	</div>
+	
+	
+	<div align="center" class="main">
 		<form action="/login/access" method="POST">
 		
 			<table>

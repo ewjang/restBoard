@@ -1,5 +1,7 @@
 package com.jew.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Controller;
@@ -16,6 +18,8 @@ import com.jew.service.MemberService;
 
 @Controller
 public class MemberController {
+	
+	private static final Logger logger=LoggerFactory.getLogger(MemberController.class);
 	
 	@Autowired
 	MemberService serivce;
@@ -34,6 +38,8 @@ public class MemberController {
 	
 	@RequestMapping(value="/member/regist", method = RequestMethod.POST)
 	public String register(Member member) throws Exception {
+		
+		logger.info("member regist");
 		
 		System.out.println("userId ");
 		
