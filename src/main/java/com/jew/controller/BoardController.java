@@ -2,6 +2,8 @@ package com.jew.controller;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,11 +12,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.jew.comm.interceptor.SessionKeys;
 import com.jew.domain.Board;
+import com.jew.domain.Member;
 import com.jew.service.BoardService;
 
 @Controller
-public class BoardController {
+public class BoardController implements SessionKeys{
 	
 	private static final Logger logger=LoggerFactory.getLogger(BoardController.class);
 	
@@ -22,14 +26,18 @@ public class BoardController {
 	private BoardService service;
 	
 	@RequestMapping(value="/board/list" ,method=RequestMethod.GET)
-	public String list(Board board, Model model) throws Exception {
+	public String list(Board board, Model model, HttpSession https) throws Exception {
 			
 		logger.info("board list");
 		
+		Member member=(Member)https.getAttribute(LOGIN);
+		logger.info("가즈아아아아아아아아아아아아 : "+member.getUserId());
+		logger.info("efwwwwwwwwwwwwwwwwww : "+https.getAttribute(LOGIN));
+		board.setUserId(member.getUserId());
+
 		ArrayList<Board> bdList=service.list(board);
-
 		model.addAttribute("bdList", bdList);
-
+		
 		return "boardList";
 	}
 	
@@ -40,7 +48,7 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value="/board/create",method=RequestMethod.POST)
-	public String create(Board board) throws Exception {
+	public String create(Board board, HttpSession https) throws Exception {
 		
 		logger.info("board create!!");
 		
@@ -54,21 +62,18 @@ public class BoardController {
 			//return "login";
 		//}else {
 			//board.setBoardId(1);
-			board.setBoardAvail(1);
+			
 			Integer bdno=service.searchNo();
 			board.setBoardNo(bdno);
-					
-//			if(colboard.isEmpty()) {
-//				logger.info("비어있다.");
-//				board.setBoardNo(1);
-//			}else {
-//				logger.info("안 비어있다.");
-//				int var=colboard.;
-//				System.out.println("var:"+var);
-//				var=var+1;
-//				board.setBoardNo(var);
-//			}
+			board.setBoardAvail(1);
+			
+			Member member=(Member)https.getAttribute(LOGIN);
+			logger.info("가즈아아아아아아아아아아아아 : "+member.getUserId());
+			logger.info("efwwwwwwwwwwwwwwwwww : "+https.getAttribute(LOGIN));
+			board.setUserId(member.getUserId());
 
+			
+			
 			service.create(board);
 		
 		return "redirect:/board/list";

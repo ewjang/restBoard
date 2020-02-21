@@ -24,7 +24,6 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public Integer searchNo() throws Exception {
 		
-		
 		Integer val=mapper.searchNo();
 		
 		System.out.println("BoardServiceImpl val : "+val);

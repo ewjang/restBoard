@@ -1,10 +1,11 @@
-<%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
-<%@ page contentType="text/html; charset=UTF-8" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
 <html>
-
 <head>
-	<title>Home</title>
-	
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
 	<style>
 		.nav{
 			height : 70px;
@@ -25,24 +26,12 @@
 
 	</style>
 </head>
-
 <body>
-<P>  The time on the server is ${serverTime}. </P>
 
-		<div align="center">
-			<h1>메인화면 </h1>
-		</div>
-
-	<div class="nav">
-		<div class="nav-right-items">	
+		<div class="nav">
+		<div class="nav-right-items">
 			<div class="nav-item">		
-				
-				<% if( session.getAttribute("loginUser")==null){ %>
-					<a href="/views/loginPageGo" style="text-decoration:none">로그인</a>
-				<% } else { %>
-					<a href="/logout" style="text-decoration:none">로그아웃</a>
-				<%} %>
-				
+				<a href="/views/loginPageGo" style="text-decoration:none">로그인</a>
 			</div>
 			<div class="nav-item">	
 				<a href="/views/memberPageGo" style="text-decoration:none">회원가입</a>			
@@ -52,7 +41,5 @@
 			</div>
 		</div>	
 	</div>
-
-
 </body>
 </html>

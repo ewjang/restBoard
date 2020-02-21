@@ -10,12 +10,14 @@
 				board_no,
 				board_title,
 				board_content,
+				user_id,
 				board_avail
 			)
 		values(
 			#{boardNo},
 			#{boardTitle},
 			#{boardContent},
+			#{userId},
 			#{boardAvail}
 		    )
 	</insert>

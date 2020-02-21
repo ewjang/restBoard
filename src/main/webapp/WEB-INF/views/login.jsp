@@ -40,8 +40,19 @@
 
 	<div class="nav">
 		<div class="nav-right-items">	
+			<div class="nav-item">
+				<% if( session.getAttribute("loginUser")==null){ %>
+					Please Login in !!!!!
+				<% } else { %>
+					${loginUser.userName }
+				<%} %>
+			</div>
 			<div class="nav-item">		
-				<a href="/views/loginPageGo" style="text-decoration:none">로그인</a>
+				<% if( session.getAttribute("loginUser")==null){ %>
+					<a href="/views/loginPageGo" style="text-decoration:none">로그인</a>
+				<% } else { %>
+					<a href="/logout" style="text-decoration:none">로그아웃</a>
+				<%} %>
 			</div>
 			<div class="nav-item">	
 				<a href="/views/memberPageGo" style="text-decoration:none">회원가입</a>			
@@ -54,22 +65,24 @@
 	
 	
 	<div align="center" class="main">
-		<form action="/login/access" method="POST">
-		
-			<table>
-				<tr>
-					<td><label for="userId">userId</label></td>
-					<td><input type="text" value="jew8960" name="userId"></td>
-				</tr>
-				<tr>
-					<td><label for="password">password</label></td>
-					<td><input type="text" value="1234" name="userPw"></td>
-				</tr>
-				
-			</table>
-					<br>
-					<br>
-				    <button style="color: white;background: green;">로그인</button>
+		<form action="/loginPost" method="POST">
+
+			<div>	
+				<label for="userId">userId</label>
+				<input type="text" value="jew8960" name="userId">
+			</div>
+			<div>
+				<label for="password">password</label>
+				<input type="text" value="1234" name="userPw">
+			</div>
+			<div>
+				<label for="userCookie">
+					<input type="checkbox" id="useCookie" name="useCookie" />Remember
+				</label>
+			</div>	
+			<div>	
+				 <button style="color: white;background: green;">로그인</button>
+			</div>
 		</form>			
 		
 				<button style="color: white;background: green;" onclick="location.href='/views/memberPageGo'">회원가입</button>

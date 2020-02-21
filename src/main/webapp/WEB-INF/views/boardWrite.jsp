@@ -38,8 +38,19 @@
 
 	<div class="nav">
 		<div class="nav-right-items">	
+			<div class="nav-item">
+				<% if( session.getAttribute("loginUser")==null){ %>
+					Please Login in !!!!!
+				<% } else { %>
+					${loginUser.userName }
+				<%} %>
+			</div>
 			<div class="nav-item">		
-				<a href="/views/loginPageGo" style="text-decoration:none">로그인</a>
+				<% if( session.getAttribute("loginUser")==null){ %>
+					<a href="/views/loginPageGo" style="text-decoration:none">로그인</a>
+				<% } else { %>
+					<a href="/logout" style="text-decoration:none">로그아웃</a>
+				<%} %>
 			</div>
 			<div class="nav-item">	
 				<a href="/views/memberPageGo" style="text-decoration:none">회원가입</a>			
@@ -64,6 +75,9 @@
 					</tr>
 					<tr>
 						<td><textarea class="form-control" placeholder="내용" name="boardContent" maxlength="2000" style="height: 350px;"></textarea></td>
+					</tr>
+					<tr>
+						<td>${loginUser.userId }</td>
 					</tr>
 				</tbody>
 			</table>

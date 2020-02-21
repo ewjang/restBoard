@@ -23,13 +23,24 @@
 	
 	<context:component-scan base-package="com.jew" />
 
-	<beans:bean id="sampleInterceptor"
-				class="com.jew.comm.interceptor.SampleInterceptor"></beans:bean>
+	<beans:bean id="sampleInterceptor" class="com.jew.comm.interceptor.SampleInterceptor"></beans:bean>
+	<beans:bean id="loginInterceptor" class="com.jew.comm.interceptor.LoginInterceptor"></beans:bean>
+	<beans:bean id="authInterceptor" class="com.jew.comm.interceptor.AuthInterceptor"></beans:bean>
 	
 	<interceptors>
 		<interceptor>
 			<mapping path="/views/loginPageGo"/>
 			<beans:ref bean="sampleInterceptor"/>
+		</interceptor>
+		
+		<interceptor>
+			<mapping path="/loginPost"/>
+			<beans:ref bean="loginInterceptor"/>
+		</interceptor>
+		
+		<interceptor>
+			<mapping path="/board/write"/>
+			<beans:ref bean="authInterceptor"/>
 		</interceptor>
 	</interceptors>
 	
