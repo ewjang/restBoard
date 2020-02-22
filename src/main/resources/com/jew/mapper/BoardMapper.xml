@@ -38,5 +38,23 @@
 		from board
 		order by board_no desc
 	</select>
+	
+	<select id="mylist" resultType="com.jew.domain.Board">
+		select 
+			board_no,
+			board_title,
+			user_id,
+			date
+		from board
+		where user_id=#{userId}
+		order by board_no desc
+	</select>
+	
+	<select id="delete">
+			delete
+			 from 
+			 board
+			 where board_no=#{boardNo}
+	</select>
 
 </mapper>

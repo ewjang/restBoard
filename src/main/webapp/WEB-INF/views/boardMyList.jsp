@@ -83,7 +83,7 @@
 					<span class="cell col4">등록날짜</span>
 					<span class="cell col5">기능</span>
 				</div>
-					 <c:forEach items="${bdList}" var="board">
+					 <c:forEach items="${bdMyList}" var="board">
 						 <div class="row">
 							<span class="cell col1">${board.boardNo}</span>
 							<span class="cell col2" onclick="location.href='/board/detail/${board.boardNo}'">${board.boardTitle }</span>

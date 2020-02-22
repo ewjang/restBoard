@@ -11,5 +11,9 @@ public interface BoardService {
 	public Integer searchNo() throws Exception;
 
 	public ArrayList<Board> list(Board board) throws Exception;
+
+	public Board delete(String boardNo) throws Exception;
+
+	public ArrayList<Board> mylist(Board board) throws Exception;
 	
 }

@@ -77,7 +77,7 @@
 						<td><textarea class="form-control" placeholder="내용" name="boardContent" maxlength="2000" style="height: 350px;"></textarea></td>
 					</tr>
 					<tr>
-						<td>${loginUser.userId }</td>
+						<td><input type="text" class="form-control" name="userId" value="${loginUser.userId }" maxlength="40" readonly="readonly"></td>
 					</tr>
 				</tbody>
 			</table>
