@@ -43,15 +43,25 @@ public class BoardServiceImpl implements BoardService {
 	}
 	
 	@Override
-	public Board delete(String boardNo) throws Exception {
-		
-		return mapper.delete(boardNo);
-
+	public void delete(String boardNo) throws Exception {
+		mapper.delete(boardNo);
 	}
 	
 	@Override
 	public ArrayList<Board> mylist(Board board) throws Exception {
 		return mapper.mylist(board);
 	}
+
+	@Override
+	public Board detail(String boardNo) throws Exception {
+			return mapper.detail(boardNo);
+	}
+	
+	@Override
+	public void update(Board board) throws Exception {
+		mapper.update(board);
+	
+	}
+
 	
 }

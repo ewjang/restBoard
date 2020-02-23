@@ -12,8 +12,12 @@ public interface BoardService {
 
 	public ArrayList<Board> list(Board board) throws Exception;
 
-	public Board delete(String boardNo) throws Exception;
+	public void delete(String boardNo) throws Exception;
 
 	public ArrayList<Board> mylist(Board board) throws Exception;
+
+	public Board detail(String boardNo) throws Exception;
+
+	public void update(Board board) throws Exception;
 	
 }

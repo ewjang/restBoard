@@ -10,8 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.jew.comm.interceptor.SessionKeys;
 import com.jew.domain.Board;
@@ -25,15 +27,7 @@ public class BoardController implements SessionKeys{
 	
 	@Autowired
 	private BoardService service;
-	
-	//board 보기 기능 구현
-	
-	@RequestMapping(value="/board/delete" , method=RequestMethod.DELETE)
-	public String delete(Board board) throws Exception {
-		
-		return "";
-	}
-	
+
 	
 	@RequestMapping(value="/board/list" ,method=RequestMethod.GET)
 	public String list(Board board, Model model, HttpSession https) throws Exception {
@@ -79,17 +73,46 @@ public class BoardController implements SessionKeys{
 	}
 	
 	@RequestMapping(value="/board/detail/{boardNo}" ,method=RequestMethod.GET)
-	public String detail(@PathVariable("boardNo") String boardNo) {
+	public ModelAndView detail(@PathVariable("boardNo") String boardNo) throws Exception {
 		logger.info("board detail page");
-	
 		logger.info("boardNo : "+boardNo);
-		//service.detail(boardNo);
+			
+		ModelAndView mav=new ModelAndView();
+		mav.setViewName("boardDetail");
+		mav.addObject("detail",service.detail(boardNo));
 		
-		return "boardDetail";
+		return mav;
+	}
+	
+	@RequestMapping(value="/board/update/{boardNo}/{userId}" ,method=RequestMethod.POST)
+	public String update(Board board) throws Exception {
+		logger.info("board update success . . . ");
+		logger.info("board.getBoardContent() : "+board.getBoardContent());
+		logger.info("board.getBoardTitle() : "+board.getBoardTitle());
+		logger.info("board.getboardNo() : "+board.getBoardNo());
+		logger.info("board.getuserId() : "+board.getUserId());
+		
+		//ModelAndView mav=new ModelAndView();
+		//mav.setViewName("boardUpdate");
+		//mav.addObject("update", service.detail(boardNo));
+		service.update(board);
+		
+		return "redirect:/board/list";
+	}
+	
+	@RequestMapping(value="/board/update/{boardNo}" ,method=RequestMethod.GET)
+	public ModelAndView updDetail(@PathVariable("boardNo") String boardNo) throws Exception {
+		logger.info("board update  . . . ");
+		
+		ModelAndView mav=new ModelAndView();
+		mav.setViewName("boardUpdate");
+		mav.addObject("update", service.detail(boardNo));
+
+		return mav;
 	}
 	
 	
-	@RequestMapping(value="/board/delete/{boardNo}" ,method=RequestMethod.GET)
+	@RequestMapping(value="/board/delete/{boardNo}", method=RequestMethod.POST)
 	public String delete(@PathVariable("boardNo") String boardNo) throws Exception {
 		logger.info("board delete page");
 	
@@ -124,9 +147,7 @@ public class BoardController implements SessionKeys{
 			logger.info("가즈아아아아아아아아아아아아 : "+member.getUserId());
 			logger.info("efwwwwwwwwwwwwwwwwww : "+https.getAttribute(LOGIN));
 			board.setUserId(member.getUserId());
-
-			
-			
+		
 			service.create(board);
 		
 		return "redirect:/board/list";

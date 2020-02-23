@@ -35,7 +35,7 @@
 		<P>  The time on the server is ${serverTime}. </P>
 
 	<h1 align="center">
-		글쓰기  
+		글 수정  
 	</h1>
 
 	<div class="nav">
@@ -64,26 +64,27 @@
 	</div>
 
 	<div class="main" align="center">
-		
+		<form action="/board/update/${update.boardNo}/${update.userId}" method="post">
 			<table>
 				<thead>
 					<tr>
-						<th colspan="2" style="background-color: green;">글 보기</th>				
+						<th colspan="2" style="background-color: green;">글 수정</th>				
 					</tr>
 				</thead>
 				<tbody>
 					<tr>
-						<td><input type="text" class="form-control" placeholder="제목" name="boardTitle" value="${detail.boardTitle }" maxlength="40" readonly="readonly"></td>
+						<td><input type="text" class="form-control" placeholder="제목" name="boardTitle" value="${update.boardTitle }" maxlength="40"></td>
 					</tr>
 					<tr>
-						<td><textarea class="form-control" placeholder="내용" name="boardContent" maxlength="2000" style="height: 350px;" readonly="readonly">${detail.boardContent }</textarea></td>
+						<td><textarea class="form-control" placeholder="내용" name="boardContent" maxlength="2000" style="height: 350px;">${update.boardContent }</textarea></td>
 					</tr>
 					<tr>
-						<td><input type="text" class="form-control" name="userId" value="${detail.userId }" maxlength="40" readonly="readonly"></td>
+						<td><input type="text" class="form-control" name="userId" value="${update.userId }" maxlength="40" readonly="readonly"></td>
 					</tr>
 				</tbody>
 			</table>
-		
+			<input type="submit" value="등록">
+		</form>
 	</div>
 </body>
 </html>

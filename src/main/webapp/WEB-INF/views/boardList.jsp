@@ -92,7 +92,7 @@
 							<span class="cell col5">
 							<c:if test="${loginUser.userId==board.userId }">
 								<!-- <button>보기</button>  -->
-								<button id="updBtn" style="color: white;background: blue;">수정</button>
+								<button id="updBtn" style="color: white;background: blue;" onclick="location.href='/board/update/${board.boardNo}'" >수정</button>
 								<button id="delBtn" style="color: white;background: red;" onclick="location.href='/board/delete/${board.boardNo}'" >삭제</button>
 							</c:if>
 							</span>
