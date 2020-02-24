@@ -112,7 +112,7 @@ public class BoardController implements SessionKeys{
 	}
 	
 	
-	@RequestMapping(value="/board/delete/{boardNo}", method=RequestMethod.POST)
+	@RequestMapping(value="/board/delete/{boardNo}")
 	public String delete(@PathVariable("boardNo") String boardNo) throws Exception {
 		logger.info("board delete page");
 	

@@ -1,9 +1,10 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
-		<title>Member Registration</title>
+		<title>Member update</title>
 		
 		<style>
 			.nav{
@@ -37,41 +38,40 @@
 <body>
 
 	<h1 align="center">
-		회원가입  
+		회원정보 수정
 	</h1>
-	<div class="nav">
-		<div class="nav-right-items">	
-				
-				<% if( session.getAttribute("loginUser")==null){ %>
-					<div class="nav-item">
-						<a href="/views/loginPageGo" style="text-decoration:none">로그인</a>
-					</div>
+		<div class="nav">
+			<div class="nav-right-items">	
+					
+					<% if( session.getAttribute("loginUser")==null){ %>
 						<div class="nav-item">
-							<a href="/views/memberPageGo" style="text-decoration:none">회원가입</a>
-						</div>		
-				<% } else { %>
-					<div class="nav-item">
-						<a href="/logout" style="text-decoration:none">로그아웃</a>
-					</div>
-						<div class="nav-item">
-							<a href="/member/update/${loginUser.userId }" style="text-decoration:none">회원정보수정</a>
-							
+							<a href="/views/loginPageGo" style="text-decoration:none">로그인</a>
 						</div>
-				<%} %>
-			<div class="nav-item">
-				<a href="/board/list" style="text-decoration:none">게시판목록</a>
-			</div>
-		</div>	
-	</div>
-	
+							<div class="nav-item">
+								<a href="/views/memberPageGo" style="text-decoration:none">회원가입</a>
+							</div>		
+					<% } else { %>
+						<div class="nav-item">
+							<a href="/logout" style="text-decoration:none">로그아웃</a>
+						</div>
+							<div class="nav-item">
+								<a href="/member/update/${loginUser.userId }" style="text-decoration:none">회원정보수정</a>
+								
+							</div>
+					<%} %>
+				<div class="nav-item">
+					<a href="/board/list" style="text-decoration:none">게시판목록</a>
+				</div>
+			</div>	
+		</div>
+		
 		<div align="center" class="main">
-			<form action="/member/regist" method="post">
+			<form action="/member/update" method="post">
 				<table>
 				
 					<tr>
 						<td><label for="userId">User ID</label></td>
-						<td><input type="text" name="userId"></td>
-						<td><button style="color: white;background: green;">Nested ID Check</button></td>
+						<td><input type="text" name="userId" value="${update.userId }" readonly="readonly"></td>
 					</tr>
 					
 					<tr>
@@ -81,27 +81,27 @@
 					
 					<tr>
 						<td><label for="userName">Name</label></td>
-						<td><input type="text" name="userName"></td>
+						<td><input type="text" name="userName" value="${update.userName }"></td>
 					</tr>
 					
 					<tr>
-						<td><label for="job">Job</label></td>   <!-- 콤보박스  -->
-						<td><input type="text" name="job"></td>
+						<td><label for="job">Job</label></td>
+						<td><input type="text" name="job" value="${update.job }"></td>
 					</tr>
 					
 					<tr>
 						<td><label for="userMail">email</label></td>
-						<td><input type="text" name="userMail"></td>
+						<td><input type="text" name="userMail" value="${update.userMail }"></td>
 					</tr>
 					
 					<tr>
 						<td><label for="userBirth">Birth</label></td>
-						<td><input type="text" name="userBirth"></td>
+						<td><input type="text" name="userBirth" value="${update.userBirth }"></td>
 					</tr>
 					
 					<tr>
 						<td><label for="hobby">Hobby</label></td>
-						<td><input type="text" name="hobby"></td>  <!-- 콤보박스  -->
+						<td><input type="text" name="hobby" value="${update.hobby }"></td>  <!-- 콤보박스  -->
 					</tr>
 				
 				</table>

@@ -25,6 +25,34 @@
 			#{hobby}
 		    )
 	</insert>
+	
+	<select id="detail" resultType="com.jew.domain.Member">
+		
+		select 
+			user_id,
+			user_pw,
+			user_name,
+			job,
+			user_mail,
+			user_birth,
+			hobby
+		from
+			member
+		where 
+			user_id=#{userId}
+	</select>
+
+	<update id="update">
+		update member
+		 set   user_pw= #{userPw},
+		 	   user_name= #{userName},
+		 	   job=#{job},
+		 	   user_mail=#{userMail},
+		 	   user_birth=#{userBirth},
+			   hobby=#{hobby}
+		
+		where user_id=#{userId} 		   
+	</update>
 
 </mapper>
 

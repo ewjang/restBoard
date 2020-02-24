@@ -51,23 +51,23 @@
 
 	<div class="nav">
 		<div class="nav-right-items">	
-			<div class="nav-item">
+				
 				<% if( session.getAttribute("loginUser")==null){ %>
-					Please Login in !!!!!
+					<div class="nav-item">
+						<a href="/views/loginPageGo" style="text-decoration:none">로그인</a>
+					</div>
+						<div class="nav-item">
+							<a href="/views/memberPageGo" style="text-decoration:none">회원가입</a>
+						</div>		
 				<% } else { %>
-					${loginUser.userName }
+					<div class="nav-item">
+						<a href="/logout" style="text-decoration:none">로그아웃</a>
+					</div>
+						<div class="nav-item">
+							<a href="/member/update/${loginUser.userId }" style="text-decoration:none">회원정보수정</a>
+							
+						</div>
 				<%} %>
-			</div>
-			<div class="nav-item">		
-				<% if( session.getAttribute("loginUser")==null){ %>
-					<a href="/views/loginPageGo" style="text-decoration:none">로그인</a>
-				<% } else { %>
-					<a href="/logout" style="text-decoration:none">로그아웃</a>
-				<%} %>
-			</div>
-			<div class="nav-item">	
-				<a href="/views/memberPageGo" style="text-decoration:none">회원가입</a>			
-			</div>
 			<div class="nav-item">
 				<a href="/board/list" style="text-decoration:none">게시판목록</a>
 			</div>
@@ -91,8 +91,8 @@
 							<span class="cell col4">${board.date }</span>
 							<span class="cell col5">
 							<c:if test="${loginUser.userId==board.userId }">
-								<!-- <button>보기</button>  -->
-								<button id="updBtn" style="color: white;background: blue;">수정</button>
+								
+								<button id="updBtn" style="color: white;background: blue;" onclick="location.href='/board/update/${board.boardNo}'" >수정</button>
 								<button id="delBtn" style="color: white;background: red;" onclick="location.href='/board/delete/${board.boardNo}'" >삭제</button>
 							</c:if>
 							</span>

@@ -14,15 +14,24 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public void register(Member member) throws Exception {
-		
-		
-		System.out.println("여기까지 찍히는가?");
+	
 		System.out.println("userId : "+member.getUserId());
 		System.out.println("hobby : "+member.getHobby());
 		System.out.println("job : "+member.getJob());
 		
-		mapper.create(member);
+		mapper.create(member);	
+	}
+	
+	@Override
+	public void update(Member member) throws Exception {
 		
+		mapper.update(member);
+	}
+
+	@Override
+	public Member memberDetail(String userId) throws Exception {
+		
+		return mapper.detail(userId);
 	}
 
 }
