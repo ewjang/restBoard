@@ -2,6 +2,9 @@ package com.jew.mapper;
 
 import java.util.ArrayList;
 
+import org.apache.ibatis.annotations.Param;
+
+import com.jew.comm.dto.Criteria;
 import com.jew.domain.Board;
 
 public interface BoardMapper {
@@ -10,13 +13,17 @@ public interface BoardMapper {
 
 	public Integer searchNo() throws Exception;
 
-	public ArrayList<Board> list(Board board) throws Exception;
+	public ArrayList<Board> list(Criteria cri) throws Exception; //수정
 	
 	public void delete(String boardNo) throws Exception;
-
-	public ArrayList<Board> mylist(Board board) throws Exception;
 	
 	public Board detail(String boardNo) throws Exception;
 
 	public void update(Board board) throws Exception;
+	
+	public int countBoardList() throws Exception; //추가
+
+	public int countMyBoardList(Board board) throws Exception;
+
+	public ArrayList<Board> mylist(@Param("board") Board board, @Param("cri") Criteria cri) throws Exception;
 }

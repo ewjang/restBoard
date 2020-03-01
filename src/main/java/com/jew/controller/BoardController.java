@@ -10,11 +10,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.jew.comm.dto.Criteria;
+import com.jew.comm.dto.PageMaker;
 import com.jew.comm.interceptor.SessionKeys;
 import com.jew.domain.Board;
 import com.jew.domain.Member;
@@ -30,23 +31,37 @@ public class BoardController implements SessionKeys{
 
 	
 	@RequestMapping(value="/board/list" ,method=RequestMethod.GET)
-	public String list(Board board, Model model, HttpSession https) throws Exception {
+	public ModelAndView list(Board board, Criteria cri, HttpSession session) throws Exception {
 			
 		logger.info("board list");
-		
-		Member member=(Member)https.getAttribute(LOGIN);
-		logger.info("가즈아아아아아아아아아아아아 : "+member.getUserId());
-		logger.info("efwwwwwwwwwwwwwwwwww : "+https.getAttribute(LOGIN));
-		board.setUserId(member.getUserId());
 
-		ArrayList<Board> bdList=service.list(board);
-		model.addAttribute("bdList", bdList);
+		Member member=(Member)session.getAttribute(LOGIN);
+		logger.info("가즈아아아아아아아아아아아아 : "+member.getUserId());
+		logger.info("efwwwwwwwwwwwwwwwwww : "+session.getAttribute(LOGIN));
+		if(member.getUserId()==null) {
+			logger.info("로그인이 필요한 기능입니다.");
+		}else {
+			board.setUserId(member.getUserId());
+		}
 		
-		return "boardList";
+		ModelAndView mav=new ModelAndView();
+		
+		PageMaker pageMaker=new PageMaker();
+		
+		pageMaker.setCri(cri);
+		pageMaker.setTotalCount(service.countBoardList());
+		
+		ArrayList<Board> bdList=service.list(cri);
+		
+		mav.setViewName("boardList");
+		mav.addObject("bdList",bdList);
+		mav.addObject("pageMaker", pageMaker);
+		
+		return mav;
 	}
 	
 	@RequestMapping(value="/board/mylist" ,method=RequestMethod.GET)
-	public String myList(Board board, Model model, HttpSession https) throws Exception {
+	public ModelAndView myList(Board board, Criteria cri, HttpSession https) throws Exception {
 			
 		logger.info("board mylist");
 		
@@ -59,10 +74,23 @@ public class BoardController implements SessionKeys{
 			board.setUserId(member.getUserId());
 		}
 	
-		ArrayList<Board> bdMyList=service.mylist(board);
-		model.addAttribute("bdMyList", bdMyList);
+		//ArrayList<Board> bdMyList=service.mylist(board);
+		//model.addAttribute("bdMyList", bdMyList);
 		
-		return "boardMyList";
+		
+		ModelAndView mav=new ModelAndView();
+		
+		PageMaker pageMaker=new PageMaker();
+		
+		pageMaker.setCri(cri);
+		pageMaker.setTotalCount(service.countMyBoardList(board));
+		
+		ArrayList<Board> bdMyList=service.mylist(board, cri);
+		
+		mav.setViewName("boardMyList");
+		mav.addObject("bdMyList", bdMyList);
+		mav.addObject("pageMaker", pageMaker);
+		return mav;
 	}
 	
 	
@@ -92,9 +120,6 @@ public class BoardController implements SessionKeys{
 		logger.info("board.getboardNo() : "+board.getBoardNo());
 		logger.info("board.getuserId() : "+board.getUserId());
 		
-		//ModelAndView mav=new ModelAndView();
-		//mav.setViewName("boardUpdate");
-		//mav.addObject("update", service.detail(boardNo));
 		service.update(board);
 		
 		return "redirect:/board/list";

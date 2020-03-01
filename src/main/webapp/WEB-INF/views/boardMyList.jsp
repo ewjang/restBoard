@@ -99,6 +99,28 @@
 						</div>
 					 </c:forEach>
 		    </div>
+		    
+		     <div align="center">
+                    <table>
+						<tr>
+						    <c:if test="${pageMaker.prev}">
+						    <td>
+						        <a href='<c:url value="/board/mylist?page=${pageMaker.startPage-1}"/>'>&laquo;</a>
+						    </td>
+						    </c:if>
+						    <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
+						    <td>
+						        <a href='<c:url value="/board/mylist?page=${idx}"/>'>${idx}</a>
+						    </td>
+						    </c:forEach>
+						    <c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+						    <td>
+						        <a href='<c:url value="/board/mylist?page=${pageMaker.endPage+1}"/>'>&raquo;</a>
+						    </td>
+						    </c:if>
+						</tr>
+					</table>
+             </div>	  
 	</div>
 	
 	<div style="margin-top: 30px" align="center" class="container-1">

@@ -2,9 +2,11 @@ package com.jew.service;
 
 import java.util.ArrayList;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.jew.comm.dto.Criteria;
 import com.jew.domain.Board;
 import com.jew.mapper.BoardMapper;
 
@@ -38,8 +40,9 @@ public class BoardServiceImpl implements BoardService {
 	}
 	
 	@Override
-	public ArrayList<Board> list(Board board) throws Exception {
-		return mapper.list(board);
+	public int countBoardList() throws Exception {
+		
+		return mapper.countBoardList();
 	}
 	
 	@Override
@@ -48,8 +51,9 @@ public class BoardServiceImpl implements BoardService {
 	}
 	
 	@Override
-	public ArrayList<Board> mylist(Board board) throws Exception {
-		return mapper.mylist(board);
+	public ArrayList<Board> mylist(@Param("board") Board board, @Param("cri") Criteria cri) throws Exception {
+		
+		return mapper.mylist(board, cri);
 	}
 
 	@Override
@@ -61,6 +65,18 @@ public class BoardServiceImpl implements BoardService {
 	public void update(Board board) throws Exception {
 		mapper.update(board);
 	
+	}
+
+	@Override
+	public ArrayList<Board> list(Criteria cri) throws Exception {
+
+		return mapper.list(cri);
+	}
+	
+	@Override
+	public int countMyBoardList(Board board) throws Exception {
+		
+		return mapper.countMyBoardList(board);
 	}
 
 	

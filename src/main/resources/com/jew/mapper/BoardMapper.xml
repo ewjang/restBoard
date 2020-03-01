@@ -37,6 +37,18 @@
 			date
 		from board
 		order by board_no desc
+		limit #{pageStart}, #{perPageNum}
+	</select>
+	
+	<select id="countBoardList" resultType="Integer">
+		select count(*)
+		from board
+	</select>
+	
+	<select id="countMyBoardList" resultType="Integer">
+		select count(*)
+		from board
+		where user_id = #{userId}
 	</select>
 	
 	<select id="mylist" resultType="com.jew.domain.Board">
@@ -46,8 +58,9 @@
 			user_id,
 			date
 		from board
-		where user_id=#{userId}
+		where user_id=#{board.userId}
 		order by board_no desc
+		limit #{cri.pageStart}, #{cri.perPageNum}
 	</select>
 	
 	<delete id="delete">
