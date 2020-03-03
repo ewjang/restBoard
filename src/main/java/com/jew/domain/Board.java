@@ -9,13 +9,21 @@ public class Board {
 	private String userId;
 	private String boardContent;
 	private int boardAvail;
-	private Date date;
+	private Date regDate;
+	private Date updDate;
 	
-	public Date getDate() {
-		return date;
+
+	public Date getRegDate() {
+		return regDate;
 	}
-	public void setDate(Date date) {
-		this.date = date;
+	public void setRegDate(Date regDate) {
+		this.regDate = regDate;
+	}
+	public Date getUpdDate() {
+		return updDate;
+	}
+	public void setUpdDate(Date updDate) {
+		this.updDate = updDate;
 	}
 	public int getBoardNo() {
 		return boardNo;
@@ -50,8 +58,6 @@ public class Board {
 	@Override
 	public String toString() {
 		return "Board [boardNo=" + boardNo + ", boardTitle=" + boardTitle + ", userId=" + userId + ", boardContent="
-				+ boardContent + ", boardAvail=" + boardAvail + ", date=" + date + "]";
+				+ boardContent + ", boardAvail=" + boardAvail + ", regDate=" + regDate + ", updDate=" + updDate + "]";
 	}
-
-	
 }

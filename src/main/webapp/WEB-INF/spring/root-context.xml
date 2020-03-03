@@ -10,7 +10,7 @@
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	<bean id="dataSource" name="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
-		<property name="url" value="jdbc:mysql://127.0.0.1:3306/carexpo"></property>
+		<property name="url" value="jdbc:mysql://127.0.0.1:3306/carexpo?zeroDateTimeBehavior=convertToNull"></property>
 		<property name="username" value="jew8960"></property>
 		<property name="password" value="1234"></property>
 	</bean>

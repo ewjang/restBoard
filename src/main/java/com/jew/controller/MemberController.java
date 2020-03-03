@@ -1,5 +1,9 @@
 package com.jew.controller;
 
+
+
+import java.util.Date;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,10 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-
-import com.jew.domain.Book;
 import com.jew.domain.Member;
 import com.jew.mapper.MemberMapper;
+import com.jew.service.CalenderService;
 import com.jew.service.MemberService;
 
 
@@ -22,9 +25,13 @@ import com.jew.service.MemberService;
 public class MemberController {
 	
 	private static final Logger logger=LoggerFactory.getLogger(MemberController.class);
+
 	
 	@Autowired
 	MemberService service;
+	
+	@Autowired
+	CalenderService calenderService;
 	
 	private final ApplicationContext applicationContext;
 	
@@ -42,18 +49,16 @@ public class MemberController {
 	public String register(Member member) throws Exception {
 		
 		logger.info("member regist");
+		logger.info("Invalid bound statement :"+service.countAll());
 		
-		System.out.println("userId ");
-		
-		service.register(member);
-		/*
-		 * 
-		 * ModelAndView mv=new ModelAndView(); mv.setViewName("views/exas");
-		 * mv.addObject("userId", member.getUserId()); mv.addObject("userName",
-		 * member.getUserName()); mv.addObject("userHobby", member.getHobby());
-		 * mv.addObject("userBirth", member.getUserBirth()); mv.addObject("userMail",
-		 * member.getUserMail()); mv.addObject("userRegDate", member.getRegDate());
-		 */
+		if(service.countAll()==0) {
+			
+			service.setAdmin(member);
+			
+		}else {
+
+			service.register(member);
+		}
 		
 		return "login";
 	}
@@ -76,19 +81,24 @@ public class MemberController {
 		
 		logger.info("Member update . . . ");
 
+		Date date=calenderService.callDate();
+		
+		logger.info("Date : "+ date);
+		
+		
 		service.update(member);
 		
 		return "home";
 	}
 	
-	///???수정필요
-	@RequestMapping(value="/member/book", method = RequestMethod.POST)
-	public String register(Book book) throws Exception {
+	@RequestMapping(value="/member/delete/{userId}")
+	public String delete(@PathVariable("userId") String userId) throws Exception{
 		
-		System.out.println("book ");
-
+		logger.info("Member delete . . .");
+		logger.info("소스트리 커밋 테스트");
+		service.delete(userId);
 		
-		return "login";
+		return "home";
 	}
-		
+
 }

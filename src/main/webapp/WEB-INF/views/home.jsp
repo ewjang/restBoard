@@ -12,17 +12,16 @@
 			border-bottom : 1px solid black;
 			align-items : center;
 		}
-		
 		.nav-right-items{
 			margin-left : auto;
 			display :flex;
-		
 		}
-		
 		.nav-item{
 			margin-left : 10px;
 		}
-
+		.container{
+			margin-top : 150px;
+		}
 	</style>
 </head>
 
@@ -47,15 +46,20 @@
 					<div class="nav-item">
 						<a href="/logout" style="text-decoration:none">로그아웃</a>
 					</div>
-						<div class="nav-item">
-							<a href="/member/update/${loginUser.userId }" style="text-decoration:none">회원정보수정</a>
-							
-						</div>
+					<div class="nav-item">
+						<a href="/member/update/${loginUser.userId }" style="text-decoration:none">회원정보수정</a>
+					</div>
+					<div class="nav-item">
+						<a href="/board/list" style="text-decoration:none">게시판목록</a>
+					</div>
 				<%} %>
-			<div class="nav-item">
-				<a href="/board/list" style="text-decoration:none">게시판목록</a>
-			</div>
+		
 		</div>	
+	</div>
+	
+	<div align="center" class="container">
+		<h1>안녕하세요? 장은우의 게시판입니다.</h1>
+	
 	</div>
 	
 </body>

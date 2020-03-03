@@ -36,10 +36,12 @@ public class BoardController implements SessionKeys{
 		logger.info("board list");
 
 		Member member=(Member)session.getAttribute(LOGIN);
-		logger.info("가즈아아아아아아아아아아아아 : "+member.getUserId());
-		logger.info("efwwwwwwwwwwwwwwwwww : "+session.getAttribute(LOGIN));
+		logger.info("/board/list userId : "+member.getUserId());
+		logger.info("/board/list session.getAttribute(LOGIN) : "+session.getAttribute(LOGIN));
 		if(member.getUserId()==null) {
-			logger.info("로그인이 필요한 기능입니다.");
+			ModelAndView temp=new ModelAndView();
+			temp.setViewName("boardList");
+			return temp;
 		}else {
 			board.setUserId(member.getUserId());
 		}
@@ -153,17 +155,6 @@ public class BoardController implements SessionKeys{
 		
 		logger.info("board create!!");
 		
-		//Member mem=new Member();
-	
-		//String userId=mem.getUserId();
-		//System.out.println("★★★userId★★★  :"+userId);
-		
-		//if(userId.equals("")) {
-			//logger.info("로그인이 되어있지 않습니다. 로그인 화면으로 가세요.");
-			//return "login";
-		//}else {
-			//board.setBoardId(1);
-			
 			Integer bdno=service.searchNo();
 			board.setBoardNo(bdno);
 			board.setBoardAvail(1);

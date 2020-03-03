@@ -53,7 +53,28 @@
 		
 		where user_id=#{userId} 		   
 	</update>
-
+	
+	<select id="countAll" resultType="Int">
+		select count(*)
+		from member
+	</select>
+	
+	<insert id="setAdmin">
+		insert into member_auth(
+				user_id, 
+				auth
+		)values(
+				#{userId}, 
+				#{auth}
+		)
+	
+	</insert>
+	
+	<delete id="delete">
+		delete
+		from member
+		where user_id=#{userId}
+	</delete>
 </mapper>
 
 

@@ -33,14 +33,15 @@
 			margin-top : 150px;
 		}
 		
-		#table {display: table; width: 65%;}
+		#table {display: table; width: 75%;}
 		.row {display: table-row;}
 		.cell {display: table-cell; padding: 3px; border-bottom: 1px solid #DDD;}
 		.col1 { width: 5%;}
 		.col2 {width: 30%;}
 		.col3 {width: 5%;}
 		.col4 {width: 10%;}
-		.col5 {width: 15%;}
+		.col5 {width: 10%;}
+		.col6 {width: 15%;}
 	</style>
 </head>
 
@@ -52,26 +53,24 @@
 
 	<div class="nav">
 		<div class="nav-right-items">	
-				
 				<% if( session.getAttribute("loginUser")==null){ %>
 					<div class="nav-item">
 						<a href="/views/loginPageGo" style="text-decoration:none">로그인</a>
 					</div>
-						<div class="nav-item">
-							<a href="/views/memberPageGo" style="text-decoration:none">회원가입</a>
-						</div>		
+					<div class="nav-item">
+						<a href="/views/memberPageGo" style="text-decoration:none">회원가입</a>
+					</div>		
 				<% } else { %>
 					<div class="nav-item">
 						<a href="/logout" style="text-decoration:none">로그아웃</a>
 					</div>
-						<div class="nav-item">
-							<a href="/member/update/${loginUser.userId }" style="text-decoration:none">회원정보수정</a>
-							
-						</div>
+					<div class="nav-item">
+						<a href="/member/update/${loginUser.userId }" style="text-decoration:none">회원정보수정</a>
+					</div>
+					<div class="nav-item">
+						<a href="/board/list" style="text-decoration:none">게시판목록</a>
+					</div>
 				<%} %>
-			<div class="nav-item">
-				<a href="/board/list" style="text-decoration:none">게시판목록</a>
-			</div>
 		</div>	
 	</div>
 
@@ -82,15 +81,17 @@
 					<span class="cell col2">제목</span>
 					<span class="cell col3">글쓴이</span>
 					<span class="cell col4">등록날짜</span>
-					<span class="cell col5">기능</span>
+					<span class="cell col5">수정날짜</span>
+					<span class="cell col6">기능</span>
 				</div>
 					 <c:forEach items="${bdList}" var="board">
 						 <div class="row">
 							<span class="cell col1">${board.boardNo}</span>
 							<span class="cell col2" onclick="location.href='/board/detail/${board.boardNo}'">${board.boardTitle }</span>
 							<span class="cell col3">${board.userId }</span>
-							<span class="cell col4">${board.date }</span>
-							<span class="cell col5">
+							<span class="cell col4">${board.regDate }</span>
+							<span class="cell col5">${board.updDate }</span>
+							<span class="cell col6">
 							<c:if test="${loginUser.userId==board.userId }">
 								<button id="updBtn" style="color: white;background: blue;" onclick="location.href='/board/update/${board.boardNo}'" >수정</button>
 								<button id="delBtn" style="color: white;background: red;" onclick="location.href='/board/delete/${board.boardNo}'" >삭제</button>

@@ -34,7 +34,8 @@
 			board_no,
 			board_title,
 			user_id,
-			date
+			reg_date,
+			upd_date
 		from board
 		order by board_no desc
 		limit #{pageStart}, #{perPageNum}
@@ -56,7 +57,8 @@
 			board_no,
 			board_title,
 			user_id,
-			date
+			reg_date,
+			upd_date
 		from board
 		where user_id=#{board.userId}
 		order by board_no desc
@@ -75,8 +77,7 @@
 				board_no,
 				board_title,
 				board_content,
-				user_id,
-				date
+				user_id
 			 from 
 			 board
 			 where board_no=#{boardNo}

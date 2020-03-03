@@ -38,26 +38,24 @@
 
 	<div class="nav">
 		<div class="nav-right-items">	
-				
 				<% if( session.getAttribute("loginUser")==null){ %>
 					<div class="nav-item">
 						<a href="/views/loginPageGo" style="text-decoration:none">로그인</a>
 					</div>
-						<div class="nav-item">
-							<a href="/views/memberPageGo" style="text-decoration:none">회원가입</a>
-						</div>		
+					<div class="nav-item">
+						<a href="/views/memberPageGo" style="text-decoration:none">회원가입</a>
+					</div>		
 				<% } else { %>
 					<div class="nav-item">
 						<a href="/logout" style="text-decoration:none">로그아웃</a>
 					</div>
-						<div class="nav-item">
-							<a href="/member/update/${loginUser.userId }" style="text-decoration:none">회원정보수정</a>
-							
-						</div>
+					<div class="nav-item">
+						<a href="/member/update/${loginUser.userId }" style="text-decoration:none">회원정보수정</a>
+					</div>
+					<div class="nav-item">
+						<a href="/board/list" style="text-decoration:none">게시판목록</a>
+					</div>
 				<%} %>
-			<div class="nav-item">
-				<a href="/board/list" style="text-decoration:none">게시판목록</a>
-			</div>
 		</div>	
 	</div>
 
