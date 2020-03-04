@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 
 import com.jew.comm.dto.Criteria;
 import com.jew.domain.Board;
+import com.jew.domain.Reply;
 
 public interface BoardService {
 	
@@ -26,5 +27,9 @@ public interface BoardService {
 	public int countBoardList() throws Exception;
 
 	public int countMyBoardList(Board board) throws Exception;
+
+	public void replyWrite(Reply reply) throws Exception;
+
+	public ArrayList<Reply> replyList(String boardNo) throws Exception;
 	
 }

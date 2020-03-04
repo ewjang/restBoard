@@ -4,6 +4,6 @@ import java.util.Date;
 
 public interface CalenderService {
 
-	public Date callDate() throws Exception;
+	public String callDate() throws Exception;
 	
 }

@@ -1,6 +1,8 @@
 package com.jew.service;
 
-import java.util.Date;
+
+
+import java.sql.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,7 +16,7 @@ public class CalenderServiceImpl implements CalenderService{
 	private DateMapper mapper;
 	
 	@Override
-	public Date callDate() throws Exception {
+	public String callDate() throws Exception {
 		
 		return mapper.callDate();
 	}

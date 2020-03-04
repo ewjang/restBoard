@@ -32,12 +32,10 @@
 	</style>
 </head>
 <body>
-		<P>  The time on the server is ${serverTime}. </P>
-
 	<h1 align="center">
-		글 수정  
+			jew's webBoard  
 	</h1>
-
+	
 	<div class="nav">
 		<div class="nav-right-items">	
 				<% if( session.getAttribute("loginUser")==null){ %>
@@ -60,6 +58,10 @@
 				<%} %>
 		</div>	
 	</div>
+	
+	<h1 align="center">
+		글 수정  
+	</h1>
 
 	<div class="main" align="center">
 		<form action="/board/update/${update.boardNo}/${update.userId}" method="post">

@@ -44,12 +44,10 @@
 </head>
 
 <body>
-<P>  The time on the server is ${serverTime}. </P>
-
 	<h1 align="center">
-		게시판 목록  
+			jew's webBoard  
 	</h1>
-
+	
 	<div class="nav">
 		<div class="nav-right-items">	
 				<% if( session.getAttribute("loginUser")==null){ %>
@@ -72,6 +70,10 @@
 				<%} %>
 		</div>	
 	</div>
+	
+	<h1 align="center">
+		나의 글 목록  
+	</h1>
 
 	<div align="center" class="container">		
 			<div id="table">

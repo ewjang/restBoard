@@ -26,11 +26,10 @@
 </head>
 
 <body>
-<P>  The time on the server is ${serverTime}. </P>
 
-		<div align="center">
-			<h1>메인화면 </h1>
-		</div>
+		<h1 align="center">
+			jew's webBoard  
+		</h1>
 
 	<div class="nav">
 		<div class="nav-right-items">	
@@ -58,7 +57,7 @@
 	</div>
 	
 	<div align="center" class="container">
-		<h1>안녕하세요? 장은우의 게시판입니다.</h1>
+		<h1>이렇게 게시판을 만들고 잠이 오니?</h1>
 	
 	</div>
 	

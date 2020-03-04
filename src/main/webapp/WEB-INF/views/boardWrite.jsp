@@ -23,17 +23,25 @@
 		.nav-item{
 			margin-left : 10px;
 		}
-		
+
 		.container{
-			margin-top : 150px;
+			margin-top : 80px;
+		}
+		.form-title{
+			width : 900px;
+		}
+		.form-content{
+			height : 400px;
+			width : 900px;
+			align-items :center;
+			margin-top : 10px;
+			overflow:auto;
 		}
 	</style>
 </head>
 <body>
-		<P>  The time on the server is ${serverTime}. </P>
-
 	<h1 align="center">
-		글쓰기  
+		jew's webBoard  
 	</h1>
 
 	<div class="nav">
@@ -58,27 +66,24 @@
 				<%} %>
 		</div>	
 	</div>
-
+	
+	<h1 align="center">
+		글쓰기  
+	</h1>
+	
 	<div class="main" align="center">
 		<form action="/board/create" method="post">
-			<table>
-				<thead>
-					<tr>
-						<th colspan="2" style="background-color: green;">글쓰기 작성</th>				
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td><input type="text" class="form-control" placeholder="제목" name="boardTitle" maxlength="40"></td>
-					</tr>
-					<tr>
-						<td><textarea class="form-control" placeholder="내용" name="boardContent" maxlength="2000" style="height: 350px;"></textarea></td>
-					</tr>
-					<tr>
-						<td><input type="text" class="form-control" name="userId" value="${loginUser.userId }" maxlength="40" readonly="readonly"></td>
-					</tr>
-				</tbody>
-			</table>
+			<div class="container" align="center">
+				<div>
+					<span>작성자 : ${loginUser.userId }</span>
+					<span>등록일자 : <%=request.getAttribute("calldate") %></span>
+					<br/>	
+			 		<input type="text" class="form-title" placeholder="제목" name="boardTitle" maxlength="40">
+				</div>
+					<div>	
+						<textarea class="form-content" placeholder="내용" name="boardContent" maxlength="2000"></textarea>
+					</div>	
+				</div>
 			<input type="submit" value="등록">
 		</form>
 	</div>

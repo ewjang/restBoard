@@ -77,7 +77,9 @@
 				board_no,
 				board_title,
 				board_content,
-				user_id
+				user_id,
+				reg_date,
+				upd_date
 			 from 
 			 board
 			 where board_no=#{boardNo}
@@ -91,5 +93,32 @@
 		where board_no=#{boardNo} and
 		 	 user_id=#{userId}
 	</update>
+	
+	<insert id="replyWrite">
+		insert into reply (
+		    board_no,
+			user_id,
+			reply_content,
+			reg_date,
+			upd_date
+		)values(
+			#{boardNo},
+			#{userId},
+			#{replyContent},
+			#{regDate},
+			#{updDate}
+		)
+	</insert>
+	
+	<select id="replyList" resultType="com.jew.domain.Reply">
+		select
+			reply_no,
+			user_id,
+			reply_content,
+			reg_date,
+			upd_date
+		from reply
+		where board_no=#{boardNo}
+	</select>
 
 </mapper>

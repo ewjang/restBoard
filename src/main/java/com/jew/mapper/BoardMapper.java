@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 
 import com.jew.comm.dto.Criteria;
 import com.jew.domain.Board;
+import com.jew.domain.Reply;
 
 public interface BoardMapper {
 	
@@ -26,4 +27,8 @@ public interface BoardMapper {
 	public int countMyBoardList(Board board) throws Exception;
 
 	public ArrayList<Board> mylist(@Param("board") Board board, @Param("cri") Criteria cri) throws Exception;
+
+	public void replyWrite(Reply reply) throws Exception;
+
+	public ArrayList<Reply> replyList(String boardNo) throws Exception;
 }

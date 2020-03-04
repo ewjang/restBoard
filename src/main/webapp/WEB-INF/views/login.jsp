@@ -33,10 +33,9 @@
 	</style>
 </head>
 <body>
-
-<h1 align="center">
-	로그인 화면  
-</h1>
+	<h1 align="center">
+		jew's webBoard  
+	</h1>
 
 	<div class="nav">
 		<div class="nav-right-items">	
@@ -61,6 +60,10 @@
 				<%} %>
 		</div>	
 	</div>
+	
+	<h1 align="center">
+		로그인 화면  
+	</h1>
 	
 	<div align="center" class="main">
 		<form action="/loginPost" method="POST">

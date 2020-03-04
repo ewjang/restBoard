@@ -36,10 +36,10 @@
 <!-- <script src="/resources/js/lib/member.js"></script> -->
 
 <body>
-
-	<h1 align="center">
-		회원정보 수정
-	</h1>
+		<h1 align="center">
+			jew's webBoard  
+		</h1>
+		
 		<div class="nav">
 			<div class="nav-right-items">	
 					<% if( session.getAttribute("loginUser")==null){ %>
@@ -62,6 +62,10 @@
 					<%} %>
 			</div>	
 		</div>
+		
+		<h1 align="center">
+			회원정보 수정
+		</h1>
 		
 		<div align="center" class="main">
 			<form action="/member/update" method="post">

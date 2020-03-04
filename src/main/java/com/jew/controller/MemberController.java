@@ -80,11 +80,6 @@ public class MemberController {
 	public String update(Member member) throws Exception {
 		
 		logger.info("Member update . . . ");
-
-		Date date=calenderService.callDate();
-		
-		logger.info("Date : "+ date);
-		
 		
 		service.update(member);
 		

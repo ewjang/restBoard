@@ -3,7 +3,7 @@
 
 
 <mapper namespace="com.jew.mapper.DateMapper">
-	<select id="callDate" resultType="Date">	
+	<select id="callDate" resultType="String">	
 		select sysdate()
 		from dual;
 	</select>

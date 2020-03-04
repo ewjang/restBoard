@@ -19,7 +19,9 @@ import com.jew.comm.dto.PageMaker;
 import com.jew.comm.interceptor.SessionKeys;
 import com.jew.domain.Board;
 import com.jew.domain.Member;
+import com.jew.domain.Reply;
 import com.jew.service.BoardService;
+import com.jew.service.CalenderService;
 
 @Controller
 public class BoardController implements SessionKeys{
@@ -29,6 +31,8 @@ public class BoardController implements SessionKeys{
 	@Autowired
 	private BoardService service;
 
+	@Autowired
+	private CalenderService clservice; //오늘 시스템 날짜 조회
 	
 	@RequestMapping(value="/board/list" ,method=RequestMethod.GET)
 	public ModelAndView list(Board board, Criteria cri, HttpSession session) throws Exception {
@@ -97,8 +101,17 @@ public class BoardController implements SessionKeys{
 	
 	
 	@RequestMapping(value="/board/write" ,method=RequestMethod.GET)
-	public String write() {
+	public String write(Model model) throws Exception{
 		logger.info("board write page");
+		
+		String calldate=clservice.callDate();
+		logger.info("Date : "+ calldate);
+		
+		model.addAttribute("calldate",clservice.callDate());
+		//ModelAndView mav =new ModelAndView();
+		//mav.setViewName("boardWrite");
+		//mav.addObject("calldate",clservice.callDate());
+		
 		return "boardWrite";
 	}
 	
@@ -110,6 +123,16 @@ public class BoardController implements SessionKeys{
 		ModelAndView mav=new ModelAndView();
 		mav.setViewName("boardDetail");
 		mav.addObject("detail",service.detail(boardNo));
+		mav.addObject("rep", service.replyList(boardNo));
+		
+		//이곳에서 댓글 보여줘야함..
+		//ModelAndView mav = new ModelAndView();
+		//mav.setViewName("boardDetail");
+		//mav.addObject("rep",service.replyList(boardNo));
+		
+		//logger.info("let's check; "+ reply.getBoardNo() + " "+ reply.getUserId() + " "+reply.getRegDate());
+		
+		
 		
 		return mav;
 	}
@@ -163,10 +186,29 @@ public class BoardController implements SessionKeys{
 			logger.info("가즈아아아아아아아아아아아아 : "+member.getUserId());
 			logger.info("efwwwwwwwwwwwwwwwwww : "+https.getAttribute(LOGIN));
 			board.setUserId(member.getUserId());
-		
+			
+			//board.setRegDate(date);
+			//logger.info("board.setRegDate(date): "+board.getRegDate());
+	
 			service.create(board);
 		
 		return "redirect:/board/list";
+	}
+	
+	@RequestMapping(value="/board/reply/create/{boardNo}", method=RequestMethod.POST)
+	public String create(@PathVariable int boardNo ,Reply reply, HttpSession https) throws Exception{
+		
+		logger.info("board reply create . . .");
+		
+		logger.info("reply content : "+reply.getReplyContent());
+		
+		Member member=(Member)https.getAttribute(LOGIN);
+		reply.setUserId(member.getUserId());
+		reply.setBoardNo(boardNo);
+		
+		service.replyWrite(reply);
+		
+		return "redirect:/board/detail/"+boardNo;
 	}
 
 	

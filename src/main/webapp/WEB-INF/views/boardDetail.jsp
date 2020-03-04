@@ -27,16 +27,51 @@
 		}
 		
 		.container{
-			margin-top : 150px;
+			margin-top : 80px;
+		}
+		
+		.form-title{
+			wifth : 900px;
+		}
+		.form-content{
+			height : 400px;
+			width : 900px;
+			align-items :center;
+			margin-top : 10px;
+			overflow:auto;
+		}
+		
+		.container-reply{
+			width : 900px;
+			background-color:silver;
+			margin-left : 500px;
+		}
+		
+		.container-reply-1{
+			padding-top : 10px;
+			padding-left : 10px;
+			border-bottom: 1px solid black;
+		}
+		
+		.form-reply-textarea{
+			padding-top : 5px;
+			padding-left : 10px;
+			width : 700px;
+			height : 40px;
+		}
+		
+		.container-replay-2{
+			padding-top : 5px;
+			padding-left : 10px;
+			padding-bottom: 5px;
+			border-bottom: 1px solid black;
 		}
 	</style>
 </head>
 <body>
-		<P>  The time on the server is ${serverTime}. </P>
-
-	<h1 align="center">
-		글쓰기  
-	</h1>
+		<h1 align="center">
+			jew's webBoard  
+		</h1>
 
 	<div class="nav">
 		<div class="nav-right-items">	
@@ -60,28 +95,39 @@
 				<%} %>
 		</div>	
 	</div>
+	
+	<h1 align="center">
+		글 읽기  
+	</h1>
 
-	<div class="main" align="center">
+	<div class="container" align="center">
+		<div>
+			<span>작성자 : ${detail.userId }</span>
+			<span>등록일자 : ${detail.regDate }</span>
+			<br/>
+			<span class="form-title">제목 : ${detail.boardTitle }</span>
+		</div>
+			<div>	
+			<textarea class="form-content" placeholder="내용" name="boardContent" maxlength="2000" readonly="readonly">${detail.boardContent }</textarea>
+		</div>	
+	</div>
+	
+	<div class="container-reply">
+		<form action="/board/reply/create/${detail.boardNo}" method="post">
+			<div class="container-reply-1">
+				<h6>${loginUser.userId}님의 Comment<h6>
+				<textarea class="form-reply-textarea" type="text" placeholder="댓글을 입력하세요." name="replyContent"></textarea>
+				<button>입력</button>
+			</div>
+		</form>
 		
-			<table>
-				<thead>
-					<tr>
-						<th colspan="2" style="background-color: green;">글 보기</th>				
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td><input type="text" class="form-control" placeholder="제목" name="boardTitle" value="${detail.boardTitle }" maxlength="40" readonly="readonly"></td>
-					</tr>
-					<tr>
-						<td><textarea class="form-control" placeholder="내용" name="boardContent" maxlength="2000" style="height: 350px;" readonly="readonly">${detail.boardContent }</textarea></td>
-					</tr>
-					<tr>
-						<td><input type="text" class="form-control" name="userId" value="${detail.userId }" maxlength="40" readonly="readonly"></td>
-					</tr>
-				</tbody>
-			</table>
-		
+		<c:forEach items="${rep}" var="reply">
+			<div class="container-replay-2">
+				<h6>${reply.userId}<h6>
+				<h6>${reply.regDate }</h6>
+				${reply.replyContent }
+			</div>
+		</c:forEach>
 	</div>
 </body>
 </html>

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.jew.comm.dto.Criteria;
 import com.jew.domain.Board;
+import com.jew.domain.Reply;
 import com.jew.mapper.BoardMapper;
 
 
@@ -52,7 +53,6 @@ public class BoardServiceImpl implements BoardService {
 	
 	@Override
 	public ArrayList<Board> mylist(@Param("board") Board board, @Param("cri") Criteria cri) throws Exception {
-		
 		return mapper.mylist(board, cri);
 	}
 
@@ -64,20 +64,26 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public void update(Board board) throws Exception {
 		mapper.update(board);
-	
 	}
 
 	@Override
 	public ArrayList<Board> list(Criteria cri) throws Exception {
-
 		return mapper.list(cri);
 	}
 	
 	@Override
 	public int countMyBoardList(Board board) throws Exception {
-		
 		return mapper.countMyBoardList(board);
 	}
+	
+	@Override
+	public void replyWrite(Reply reply) throws Exception {
+		  mapper.replyWrite(reply);
+	}
 
+	@Override
+	public ArrayList<Reply> replyList(String boardNo) throws Exception {
+		return mapper.replyList(boardNo);
+	}
 	
 }
