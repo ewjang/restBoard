@@ -72,17 +72,13 @@ public class BoardController implements SessionKeys{
 		logger.info("board mylist");
 		
 		Member member=(Member)https.getAttribute(LOGIN);
-		logger.info("가즈아아아아아아아아아아아아 : "+member.getUserId());
-		logger.info("efwwwwwwwwwwwwwwwwww : "+https.getAttribute(LOGIN));
+		logger.info("member.getUserId() : "+member.getUserId());
+//		logger.info("https.getAttribute(LOGIN) : "+https.getAttribute(LOGIN));
 		if(member.getUserId()==null) {
 			logger.info("[내가 쓴 글 모음 기능]은 로그인이 필요한 기능입니다.");
 		}else {
 			board.setUserId(member.getUserId());
 		}
-	
-		//ArrayList<Board> bdMyList=service.mylist(board);
-		//model.addAttribute("bdMyList", bdMyList);
-		
 		
 		ModelAndView mav=new ModelAndView();
 		
@@ -116,24 +112,24 @@ public class BoardController implements SessionKeys{
 	}
 	
 	@RequestMapping(value="/board/detail/{boardNo}" ,method=RequestMethod.GET)
-	public ModelAndView detail(@PathVariable("boardNo") String boardNo) throws Exception {
+	public ModelAndView detail(@PathVariable("boardNo") int boardNo, Criteria cri) throws Exception {
 		logger.info("board detail page");
 		logger.info("boardNo : "+boardNo);
-			
+		
+		PageMaker pageMaker=new PageMaker();	
+		pageMaker.setCri(cri);
+		pageMaker.setTotalCount(service.countReplyList(boardNo));
+	
+		Reply rp=new Reply();
+		rp.setBoardNo(boardNo);
+		
 		ModelAndView mav=new ModelAndView();
 		mav.setViewName("boardDetail");
 		mav.addObject("detail",service.detail(boardNo));
-		mav.addObject("rep", service.replyList(boardNo));
+		mav.addObject("rep", service.replyList(rp, cri));
+		mav.addObject("pageMaker", pageMaker);
 		
-		//이곳에서 댓글 보여줘야함..
-		//ModelAndView mav = new ModelAndView();
-		//mav.setViewName("boardDetail");
-		//mav.addObject("rep",service.replyList(boardNo));
-		
-		//logger.info("let's check; "+ reply.getBoardNo() + " "+ reply.getUserId() + " "+reply.getRegDate());
-		
-		
-		
+		logger.info("이건 찍힌다2");
 		return mav;
 	}
 	
@@ -151,7 +147,7 @@ public class BoardController implements SessionKeys{
 	}
 	
 	@RequestMapping(value="/board/update/{boardNo}" ,method=RequestMethod.GET)
-	public ModelAndView updDetail(@PathVariable("boardNo") String boardNo) throws Exception {
+	public ModelAndView updDetail(@PathVariable("boardNo") int boardNo) throws Exception {
 		logger.info("board update  . . . ");
 		
 		ModelAndView mav=new ModelAndView();
@@ -183,8 +179,8 @@ public class BoardController implements SessionKeys{
 			board.setBoardAvail(1);
 			
 			Member member=(Member)https.getAttribute(LOGIN);
-			logger.info("가즈아아아아아아아아아아아아 : "+member.getUserId());
-			logger.info("efwwwwwwwwwwwwwwwwww : "+https.getAttribute(LOGIN));
+			logger.info("member.getUserId() : "+member.getUserId());
+			logger.info("https.getAttribute(LOGIN) : "+https.getAttribute(LOGIN));
 			board.setUserId(member.getUserId());
 			
 			//board.setRegDate(date);
@@ -210,6 +206,20 @@ public class BoardController implements SessionKeys{
 		
 		return "redirect:/board/detail/"+boardNo;
 	}
-
+	
+	@RequestMapping(value="/board/reply/delete/{boardNo}/{replyNo}")
+	public String delete(@PathVariable int replyNo , @PathVariable int boardNo, Reply reply)throws Exception{
+		//redirect에 활용하기위해 boardno 경로로 파라미터 받음
+		
+		logger.info("board reply delete . . . ");
+	
+		logger.info("replyNo : "+ replyNo);
+		logger.info("boardNo : "+ boardNo); 
+		
+		service.replyDelete(replyNo);
+		
+		return "redirect:/board/detail/"+boardNo;
+	}
+	
 	
 }

@@ -57,7 +57,7 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public Board detail(String boardNo) throws Exception {
+	public Board detail(int boardNo) throws Exception {
 			return mapper.detail(boardNo);
 	}
 	
@@ -82,8 +82,22 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public ArrayList<Reply> replyList(String boardNo) throws Exception {
-		return mapper.replyList(boardNo);
+	public ArrayList<Reply> replyList(@Param("reply") Reply rp, @Param("cri") Criteria cri) throws Exception {
+		
+		System.out.println("답글 페이징 에러 로그 : "+ rp.getBoardNo());
+		
+		return mapper.replyList(rp, cri);
 	}
 	
+	@Override
+	public void replyDelete(int replyNo) throws Exception {
+		mapper.replyDelete(replyNo);
+	}
+	
+	@Override
+	public int countReplyList(int boardNo) throws Exception {
+		
+		return mapper.countReplyList(boardNo);
+	}
+
 }

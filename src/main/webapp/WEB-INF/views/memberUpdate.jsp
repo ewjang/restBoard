@@ -108,10 +108,10 @@
 				
 				</table>
 				
-				<button style="color:white;background-color: green;">등록</button>
+				<button style="color:white;background-color: green;">수정 등록</button>
 				<!-- <input style="color: white;background-color: green;" type="button" value="등록" id="memberRegistBtn"/> -->
 			</form>
-				<button style="color:white;background-color: black;" onclick="location.href='/member/delete/${update.userId}'">삭제</button>
+				<button style="color:white;background-color: black;" onclick="location.href='/member/delete/${update.userId}'">계정 삭제</button>
 			
 		</div>
 

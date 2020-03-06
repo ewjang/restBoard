@@ -18,7 +18,7 @@ public interface BoardMapper {
 	
 	public void delete(String boardNo) throws Exception;
 	
-	public Board detail(String boardNo) throws Exception;
+	public Board detail(int boardNo) throws Exception;
 
 	public void update(Board board) throws Exception;
 	
@@ -30,5 +30,10 @@ public interface BoardMapper {
 
 	public void replyWrite(Reply reply) throws Exception;
 
-	public ArrayList<Reply> replyList(String boardNo) throws Exception;
+	public ArrayList<Reply> replyList(@Param("reply") Reply rp, @Param("cri") Criteria cri) throws Exception;
+
+	public void replyDelete(int replyNo) throws Exception;
+
+	public int countReplyList(int boardNo) throws Exception;
+	
 }

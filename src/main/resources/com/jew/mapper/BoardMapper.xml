@@ -67,8 +67,7 @@
 	
 	<delete id="delete">
 			delete
-			 from 
-			 board
+			 from board
 			 where board_no=#{boardNo}
 	</delete>
 
@@ -80,8 +79,7 @@
 				user_id,
 				reg_date,
 				upd_date
-			 from 
-			 board
+			 from board
 			 where board_no=#{boardNo}
 	</select>
 	
@@ -118,7 +116,20 @@
 			reg_date,
 			upd_date
 		from reply
+		where board_no=#{reply.boardNo}
+		order by board_no desc
+		limit #{cri.pageStart}, #{cri.perPageNum}
+	</select>
+	
+	<delete id="replyDelete">
+		delete from reply
+		where reply_no=#{replyNo}
+	</delete>
+	
+	<select id="countReplyList" resultType="Integer">
+		select count(*)
+		from reply
 		where board_no=#{boardNo}
 	</select>
-
+	
 </mapper>

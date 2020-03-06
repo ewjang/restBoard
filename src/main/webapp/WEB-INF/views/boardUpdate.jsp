@@ -29,6 +29,18 @@
 		.container{
 			margin-top : 150px;
 		}
+		
+		.form-title{
+			width : 900px;
+		}
+		
+		.form-content{
+			height : 400px;
+			width : 900px;
+			align-items :center;
+			margin-top : 10px;
+			overflow:auto;
+		}
 	</style>
 </head>
 <body>
@@ -63,28 +75,19 @@
 		글 수정  
 	</h1>
 
-	<div class="main" align="center">
-		<form action="/board/update/${update.boardNo}/${update.userId}" method="post">
-			<table>
-				<thead>
-					<tr>
-						<th colspan="2" style="background-color: green;">글 수정</th>				
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td><input type="text" class="form-control" placeholder="제목" name="boardTitle" value="${update.boardTitle }" maxlength="40"></td>
-					</tr>
-					<tr>
-						<td><textarea class="form-control" placeholder="내용" name="boardContent" maxlength="2000" style="height: 350px;">${update.boardContent }</textarea></td>
-					</tr>
-					<tr>
-						<td><input type="text" class="form-control" name="userId" value="${update.userId }" maxlength="40" readonly="readonly"></td>
-					</tr>
-				</tbody>
-			</table>
-			<input type="submit" value="등록">
-		</form>
+	<div class="container" align="center">
+			<form action="/board/update/${update.boardNo}/${update.userId}" method="post">
+				<div>
+					<span>작성자 : ${update.userId }</span>
+					<span>등록일자 : ${update.regDate }</span>
+					<br/>
+					<input type="text" class="form-title" placeholder="제목" name="boardTitle" value="${update.boardTitle }" maxlength="40">
+				</div>
+					<div>	
+					<textarea class="form-content" placeholder="내용" name="boardContent" maxlength="2000" style="height: 350px;">${update.boardContent }</textarea>
+					</div>
+					<input type="submit" value="등록">
+			</form>
 	</div>
 </body>
 </html>

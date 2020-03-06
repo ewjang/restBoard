@@ -29,6 +29,10 @@
 			margin-top : 230px;
 			align-items : center;
 		}
+		
+		.btn{
+			display :flex;
+		}
 	
 	</style>
 </head>
@@ -43,8 +47,6 @@
 				<% if( session.getAttribute("loginUser")==null){ %>
 					<div class="nav-item">
 						<a href="/views/loginPageGo" style="text-decoration:none">로그인</a>
-					</div>
-					<div class="nav-item">
 						<a href="/views/memberPageGo" style="text-decoration:none">회원가입</a>
 					</div>		
 				<% } else { %>
@@ -70,11 +72,11 @@
 
 			<div>	
 				<label for="userId">userId</label>
-				<input type="text" value="jew8960" name="userId">
+				<input type="text" name="userId">
 			</div>
 			<div>
 				<label for="password">password</label>
-				<input type="text" value="1234" name="userPw">
+				<input type="password" name="userPw">
 			</div>
 			<div>
 				<label for="userCookie">
@@ -82,11 +84,10 @@
 				</label>
 			</div>	
 			<div>	
-				 <button style="color: white;background: green;">로그인</button>
+				 <button class="btn" style="color: white;background: green;">로그인</button>
 			</div>
-		</form>			
-		
-				<button style="color: white;background: green;" onclick="location.href='/views/memberPageGo'">회원가입</button>
+		</form>
+				 <button class="btn" style="color: white;background: green;" onclick="location.href='/views/memberPageGo'">회원가입</button>	
 	</div>
 
 </body>

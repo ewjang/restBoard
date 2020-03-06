@@ -31,7 +31,7 @@
 		}
 		
 		.form-title{
-			wifth : 900px;
+			width : 900px;
 		}
 		.form-content{
 			height : 400px;
@@ -107,7 +107,7 @@
 			<br/>
 			<span class="form-title">제목 : ${detail.boardTitle }</span>
 		</div>
-			<div>	
+		<div>	
 			<textarea class="form-content" placeholder="내용" name="boardContent" maxlength="2000" readonly="readonly">${detail.boardContent }</textarea>
 		</div>	
 	</div>
@@ -126,8 +126,35 @@
 				<h6>${reply.userId}<h6>
 				<h6>${reply.regDate }</h6>
 				${reply.replyContent }
+				<c:if test="${loginUser.userId==reply.userId }">
+					<button onclick="location.href='/board/reply/delete/${detail.boardNo}/${reply.replyNo}'">댓글 삭제</button>
+				</c:if>	
+				
 			</div>
 		</c:forEach>
 	</div>
+	
+	 <div align="center">
+                    <table>
+						<tr>
+						    <c:if test="${pageMaker.prev}">
+						    <td>
+						        <a href='<c:url value="/board/detail/${detail.boardNo }?page=${pageMaker.startPage-1}"/>'>&laquo;</a>
+						    </td>
+						    </c:if>
+						    <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
+						    <td>
+						        <a href='<c:url value="/board/detail/${detail.boardNo }?page=${idx}"/>'>${idx}</a>
+						    </td>
+						    </c:forEach>
+						    <c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+						    <td>
+						        <a href='<c:url value="/board/detail/${detail.boardNo }?page=${pageMaker.endPage+1}"/>'>&raquo;</a>
+						    </td>
+						    </c:if>
+						</tr>
+					</table>
+             </div>	  
+	
 </body>
 </html>
