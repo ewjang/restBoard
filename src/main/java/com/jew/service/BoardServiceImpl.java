@@ -20,10 +20,24 @@ public class BoardServiceImpl implements BoardService {
 	
 	@Override
 	public void create(Board board) throws Exception {
-
 		mapper.create(board);	
 	}
-
+	
+	@Override
+	public void delete(String boardNo) throws Exception {
+		mapper.delete(boardNo);
+	}
+	
+	@Override
+	public Board detail(int boardNo) throws Exception {
+			return mapper.detail(boardNo);
+	}
+	
+	@Override
+	public void update(Board board) throws Exception {
+		mapper.update(board);
+	}
+	
 	@Override
 	public Integer searchNo() throws Exception {
 		
@@ -47,23 +61,8 @@ public class BoardServiceImpl implements BoardService {
 	}
 	
 	@Override
-	public void delete(String boardNo) throws Exception {
-		mapper.delete(boardNo);
-	}
-	
-	@Override
 	public ArrayList<Board> mylist(@Param("board") Board board, @Param("cri") Criteria cri) throws Exception {
 		return mapper.mylist(board, cri);
-	}
-
-	@Override
-	public Board detail(int boardNo) throws Exception {
-			return mapper.detail(boardNo);
-	}
-	
-	@Override
-	public void update(Board board) throws Exception {
-		mapper.update(board);
 	}
 
 	@Override
@@ -83,9 +82,6 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public ArrayList<Reply> replyList(@Param("reply") Reply rp, @Param("cri") Criteria cri) throws Exception {
-		
-		System.out.println("답글 페이징 에러 로그 : "+ rp.getBoardNo());
-		
 		return mapper.replyList(rp, cri);
 	}
 	

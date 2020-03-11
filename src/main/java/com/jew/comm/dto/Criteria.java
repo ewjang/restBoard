@@ -2,7 +2,7 @@ package com.jew.comm.dto;
 
 public class Criteria {
 
-	/* 현재 페이지 번호 */
+	/*현재 페이지 번호 */
 	private int page;
 
 	/* 한 페이지당 보여질 게시글의 갯수 */

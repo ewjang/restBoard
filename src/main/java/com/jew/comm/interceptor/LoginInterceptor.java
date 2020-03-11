@@ -21,7 +21,6 @@ public class LoginInterceptor extends HandlerInterceptorAdapter implements Sessi
 			//로그인 객체가 있으면 삭제
 			session.removeAttribute(LOGIN);
 		}
-
 		return true;
 	}
 	
@@ -35,7 +34,6 @@ public class LoginInterceptor extends HandlerInterceptorAdapter implements Sessi
 		Object member=modelAndView.getModelMap().get("member");
 		if(member!=null) {
 			session.setAttribute(LOGIN , member);
-			System.out.println("로그인 성공했다!!!");
 			
 			if(StringUtils.isNullOrEmpty(request.getParameter("useCookie"))) {
 				

@@ -2,8 +2,6 @@ package com.jew.controller;
 
 
 
-import java.util.Date;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
 import com.jew.domain.Member;
 import com.jew.mapper.MemberMapper;
 import com.jew.service.CalenderService;
@@ -65,10 +64,7 @@ public class MemberController {
 	@RequestMapping(value="/member/update/{userId}" , method=RequestMethod.GET)
 	public ModelAndView updMember(@PathVariable("userId") String userId ) throws Exception{
 		
-		logger.info("Member update page...");
-		
-		logger.info("userId는 ? : "+userId);
-		
+		logger.info("Member update page...");		
 		ModelAndView mav=new ModelAndView();
 		mav.setViewName("memberUpdate");
 		mav.addObject("update", service.memberDetail(userId));
@@ -78,21 +74,15 @@ public class MemberController {
 
 	@RequestMapping(value="/member/update", method = RequestMethod.POST)
 	public String update(Member member) throws Exception {
-		
 		logger.info("Member update . . . ");
-		
-		service.update(member);
-		
+		service.update(member);		
 		return "home";
 	}
 	
 	@RequestMapping(value="/member/delete/{userId}")
-	public String delete(@PathVariable("userId") String userId) throws Exception{
-		
+	public String delete(@PathVariable("userId") String userId) throws Exception{	
 		logger.info("Member delete . . .");
-		logger.info("소스트리 커밋 테스트");
-		service.delete(userId);
-		
+		service.delete(userId);		
 		return "home";
 	}
 

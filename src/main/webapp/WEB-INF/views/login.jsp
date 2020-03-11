@@ -69,7 +69,13 @@
 	
 	<div align="center" class="main">
 		<form action="/loginPost" method="POST">
-
+		
+			<%if(session.getAttribute("loginUser")==null){ %>
+			<div>
+				${ loginResult }
+			</div>
+			<%} %>
+			
 			<div>	
 				<label for="userId">userId</label>
 				<input type="text" name="userId">

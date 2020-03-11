@@ -2,7 +2,6 @@ package com.jew.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.jew.domain.Member;
 import com.jew.domain.MemberAuth;
@@ -16,30 +15,12 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public void register(Member member) throws Exception {
-
 		mapper.create(member);	
 	}
-	
-	@Override
-	public void update(Member member) throws Exception {
-		
-		mapper.update(member);
-	}
-
-	@Override
-	public Member memberDetail(String userId) throws Exception {
-		
-		return mapper.detail(userId);
-	}
-
 	@Override
 	public int countAll() throws Exception {
-		System.out.println("찍히나 테스트;;");
-		
 		return mapper.countAll();
 	}
-	
-	@Transactional
 	@Override
 	public void setAdmin(Member member) throws Exception {
 		
@@ -52,8 +33,20 @@ public class MemberServiceImpl implements MemberService {
 		mapper.setAdmin(memberAuth);
 	}
 	
-	 @Override
-	public void delete(String userId) throws Exception {
-		 mapper.delete(userId);
+	@Override
+	public void update(Member member) throws Exception {
+		mapper.update(member);
 	}
+	
+	@Override
+	public void delete(String userId) throws Exception {
+	    mapper.delete(userId);
+	}
+
+	@Override
+	public Member memberDetail(String userId) throws Exception {
+		return mapper.detail(userId);
+	}
+	
+	
 }

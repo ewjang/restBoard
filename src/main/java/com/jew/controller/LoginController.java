@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.util.WebUtils;
 
 import com.jew.comm.dto.LoginDto;
@@ -27,8 +28,6 @@ public class LoginController {
 	@Autowired
 	LoginService service;
 		
-	
-	
 	//삭제 해야함....
 	@RequestMapping(value="/login/access")
 	public String userAccess(Member member, Model model) throws Exception{
@@ -61,21 +60,23 @@ public class LoginController {
 	}
 	
 	@RequestMapping(value="/loginPost", method=RequestMethod.POST)
-	public void loginPost(LoginDto dto, Model model) throws Exception{
+	public ModelAndView loginPost(LoginDto dto) throws Exception{
 		
 		logger.info("loginPost",dto);
-		
+		ModelAndView mav=new ModelAndView();
 		try {
 			Member mem=service.login(dto);
 			if(mem != null) { //login 성공
-				model.addAttribute("member", mem);
-				model.addAttribute("loginResult","Login Success!!");
+				mav.addObject("member", mem);
+				mav.addObject("loginResult","Login Success!!");
 			}else {
-				model.addAttribute("loginResult","Login fail!!");
+				mav.addObject("loginResult","Login fail!!");
 			}
+			mav.setViewName("login");
 		} catch(Exception e){
 			e.printStackTrace();
 		}
+		return mav;
 	}
 	
 	@RequestMapping(value="/logout" , method=RequestMethod.GET)

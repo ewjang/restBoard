@@ -73,7 +73,7 @@
 					<tr>
 						<td><label for="userId">User ID</label></td>
 						<td><input type="text" name="userId"></td>
-						<td><button style="color: white;background: green;">Nested ID Check</button></td>
+						<!--<td><button style="color: white;background: green;">Nested ID Check</button></td>  -->
 					</tr>
 					
 					<tr>

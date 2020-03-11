@@ -22,49 +22,6 @@
 		    )
 	</insert>
 
-
-	<select id="searchNo" resultType="Integer"> 
-		select max(board_no)
-		from board
-	</select>
-	
-	
-	<select id="list" resultType="com.jew.domain.Board">
-		select 
-			board_no,
-			board_title,
-			user_id,
-			reg_date,
-			upd_date
-		from board
-		order by board_no desc
-		limit #{pageStart}, #{perPageNum}
-	</select>
-	
-	<select id="countBoardList" resultType="Integer">
-		select count(*)
-		from board
-	</select>
-	
-	<select id="countMyBoardList" resultType="Integer">
-		select count(*)
-		from board
-		where user_id = #{userId}
-	</select>
-	
-	<select id="mylist" resultType="com.jew.domain.Board">
-		select 
-			board_no,
-			board_title,
-			user_id,
-			reg_date,
-			upd_date
-		from board
-		where user_id=#{board.userId}
-		order by board_no desc
-		limit #{cri.pageStart}, #{cri.perPageNum}
-	</select>
-	
 	<delete id="delete">
 			delete
 			 from board
@@ -91,6 +48,48 @@
 		where board_no=#{boardNo} and
 		 	 user_id=#{userId}
 	</update>
+
+	<select id="searchNo" resultType="Integer"> 
+		select max(board_no)
+		from board
+	</select>
+	
+	
+	<select id="list" resultType="com.jew.domain.Board">
+		select 
+			board_no,
+			board_title,
+			user_id,
+			reg_date,
+			upd_date
+		from board
+		order by board_no desc
+		limit #{pageStart}, #{perPageNum}
+	</select>
+	
+	<select id="mylist" resultType="com.jew.domain.Board">
+		select 
+			board_no,
+			board_title,
+			user_id,
+			reg_date,
+			upd_date
+		from board
+		where user_id=#{board.userId}
+		order by board_no desc
+		limit #{cri.pageStart}, #{cri.perPageNum}
+	</select>
+	
+	<select id="countBoardList" resultType="Integer">
+		select count(*)
+		from board
+	</select>
+	
+	<select id="countMyBoardList" resultType="Integer">
+		select count(*)
+		from board
+		where user_id = #{userId}
+	</select>
 	
 	<insert id="replyWrite">
 		insert into reply (

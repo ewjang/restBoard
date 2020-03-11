@@ -73,7 +73,7 @@ public class BoardController implements SessionKeys{
 		
 		Member member=(Member)https.getAttribute(LOGIN);
 		logger.info("member.getUserId() : "+member.getUserId());
-//		logger.info("https.getAttribute(LOGIN) : "+https.getAttribute(LOGIN));
+		
 		if(member.getUserId()==null) {
 			logger.info("[내가 쓴 글 모음 기능]은 로그인이 필요한 기능입니다.");
 		}else {
@@ -111,6 +111,47 @@ public class BoardController implements SessionKeys{
 		return "boardWrite";
 	}
 	
+	@RequestMapping(value="/board/update/{boardNo}/{userId}" ,method=RequestMethod.POST)
+	public String update(Board board) throws Exception {	
+		service.update(board);
+		return "redirect:/board/list";
+	}
+	
+	@RequestMapping(value="/board/update/{boardNo}" ,method=RequestMethod.GET)
+	public ModelAndView updDetail(@PathVariable("boardNo") int boardNo) throws Exception {
+		logger.info("board update  . . . ");	
+		ModelAndView mav=new ModelAndView();
+		mav.setViewName("boardUpdate");
+		mav.addObject("update", service.detail(boardNo));
+		return mav;
+	}
+	
+	@RequestMapping(value="/board/delete/{boardNo}")
+	public String delete(@PathVariable("boardNo") String boardNo) throws Exception {
+		logger.info("board delete page");
+		logger.info("boardNo : "+boardNo);
+		service.delete(boardNo);
+		return "redirect:/board/list";
+	}
+	
+	@RequestMapping(value="/board/create",method=RequestMethod.POST)
+	public String create(Board board, HttpSession https) throws Exception {
+		
+		logger.info("board create!!");
+		
+			Integer bdno=service.searchNo();
+			board.setBoardNo(bdno);
+			board.setBoardAvail(1);
+			
+			Member member=(Member)https.getAttribute(LOGIN);
+			logger.info("member.getUserId() : "+member.getUserId());
+			logger.info("https.getAttribute(LOGIN) : "+https.getAttribute(LOGIN));
+			board.setUserId(member.getUserId());
+
+			service.create(board);
+		
+		return "redirect:/board/list";
+	}
 	@RequestMapping(value="/board/detail/{boardNo}" ,method=RequestMethod.GET)
 	public ModelAndView detail(@PathVariable("boardNo") int boardNo, Criteria cri) throws Exception {
 		logger.info("board detail page");
@@ -128,96 +169,26 @@ public class BoardController implements SessionKeys{
 		mav.addObject("detail",service.detail(boardNo));
 		mav.addObject("rep", service.replyList(rp, cri));
 		mav.addObject("pageMaker", pageMaker);
-		
-		logger.info("이건 찍힌다2");
 		return mav;
 	}
-	
-	@RequestMapping(value="/board/update/{boardNo}/{userId}" ,method=RequestMethod.POST)
-	public String update(Board board) throws Exception {
-		logger.info("board update success . . . ");
-		logger.info("board.getBoardContent() : "+board.getBoardContent());
-		logger.info("board.getBoardTitle() : "+board.getBoardTitle());
-		logger.info("board.getboardNo() : "+board.getBoardNo());
-		logger.info("board.getuserId() : "+board.getUserId());
-		
-		service.update(board);
-		
-		return "redirect:/board/list";
-	}
-	
-	@RequestMapping(value="/board/update/{boardNo}" ,method=RequestMethod.GET)
-	public ModelAndView updDetail(@PathVariable("boardNo") int boardNo) throws Exception {
-		logger.info("board update  . . . ");
-		
-		ModelAndView mav=new ModelAndView();
-		mav.setViewName("boardUpdate");
-		mav.addObject("update", service.detail(boardNo));
-
-		return mav;
-	}
-	
-	
-	@RequestMapping(value="/board/delete/{boardNo}")
-	public String delete(@PathVariable("boardNo") String boardNo) throws Exception {
-		logger.info("board delete page");
-	
-		logger.info("boardNo : "+boardNo);
-		service.delete(boardNo);
-		
-		return "redirect:/board/list";
-	}
-	
-	
-	@RequestMapping(value="/board/create",method=RequestMethod.POST)
-	public String create(Board board, HttpSession https) throws Exception {
-		
-		logger.info("board create!!");
-		
-			Integer bdno=service.searchNo();
-			board.setBoardNo(bdno);
-			board.setBoardAvail(1);
-			
-			Member member=(Member)https.getAttribute(LOGIN);
-			logger.info("member.getUserId() : "+member.getUserId());
-			logger.info("https.getAttribute(LOGIN) : "+https.getAttribute(LOGIN));
-			board.setUserId(member.getUserId());
-			
-			//board.setRegDate(date);
-			//logger.info("board.setRegDate(date): "+board.getRegDate());
-	
-			service.create(board);
-		
-		return "redirect:/board/list";
-	}
-	
 	@RequestMapping(value="/board/reply/create/{boardNo}", method=RequestMethod.POST)
 	public String create(@PathVariable int boardNo ,Reply reply, HttpSession https) throws Exception{
 		
 		logger.info("board reply create . . .");
-		
 		logger.info("reply content : "+reply.getReplyContent());
 		
 		Member member=(Member)https.getAttribute(LOGIN);
 		reply.setUserId(member.getUserId());
 		reply.setBoardNo(boardNo);
-		
 		service.replyWrite(reply);
-		
 		return "redirect:/board/detail/"+boardNo;
 	}
 	
 	@RequestMapping(value="/board/reply/delete/{boardNo}/{replyNo}")
 	public String delete(@PathVariable int replyNo , @PathVariable int boardNo, Reply reply)throws Exception{
 		//redirect에 활용하기위해 boardno 경로로 파라미터 받음
-		
 		logger.info("board reply delete . . . ");
-	
-		logger.info("replyNo : "+ replyNo);
-		logger.info("boardNo : "+ boardNo); 
-		
 		service.replyDelete(replyNo);
-		
 		return "redirect:/board/detail/"+boardNo;
 	}
 	
