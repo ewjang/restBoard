@@ -44,6 +44,24 @@ public class MemberController {
 		return "bean: "+applicationContext.getBean(MemberMapper.class);
 	}
 	
+	@RequestMapping(value="/member/idchk/{userId}", method=RequestMethod.GET,  produces = "application/text; charset=utf8")
+	@ResponseBody
+	public String idChk(@PathVariable("userId") String userId) throws Exception{
+		
+		logger.info("컨트롤러확인 : " + userId);
+		
+		String temp=service.idChk(userId);
+		
+		logger.info("체크확인 : " +temp);
+		if(temp==null) {
+			logger.info("사용 가능합니다.");
+			return "사용 가능합니다.";
+		}else {
+			logger.info("이미 해당 아이디가 있습니다.");
+			return "이미 해당 아이디가 있습니다.";
+		}
+	}
+	
 	@RequestMapping(value="/member/regist", method = RequestMethod.POST)
 	public String register(Member member) throws Exception {
 		
@@ -51,14 +69,10 @@ public class MemberController {
 		logger.info("Invalid bound statement :"+service.countAll());
 		
 		if(service.countAll()==0) {
-			
 			service.setAdmin(member);
-			
 		}else {
-
 			service.register(member);
 		}
-		
 		return "login";
 	}
 	@RequestMapping(value="/member/update/{userId}" , method=RequestMethod.GET)

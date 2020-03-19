@@ -12,10 +12,5 @@ public interface MemberService {
 	public void delete(String userId) throws Exception;
 	public Member memberDetail(String userId) throws Exception;
 
-
-	
-
-	
-	
-	
+	public String idChk(String userId) throws Exception;
 }

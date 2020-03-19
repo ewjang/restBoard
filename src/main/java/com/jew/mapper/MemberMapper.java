@@ -12,8 +12,6 @@ public interface MemberMapper {
 	public void update(Member member) throws Exception;
 	public void delete(String userId) throws Exception;
 	public Member detail(String userId) throws Exception;
-
-
-	
+	public String idChk(String userId) throws Exception;
 	
 }

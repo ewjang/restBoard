@@ -158,7 +158,7 @@
 			<version>5.1.35</version>
 		</dependency>
 		
-		<!-- json data bind를 위한 module (이것이 없으면 json, xml데이터 바인딩이 안됨) -->
+		<!-- json data bind를 위한 module-->
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>

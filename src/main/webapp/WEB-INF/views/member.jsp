@@ -5,6 +5,9 @@
 <head>
 		<title>Member Registration</title>
 		
+		<script src="/resources/js/jQuery-2.1.4.min.js"></script>
+		<script src="/resources/js/app/member.js"></script>
+		
 		<style>
 			.nav{
 				height : 70px;
@@ -15,8 +18,7 @@
 		
 			.nav-right-items{
 				margin-left : auto;
-				display :flex;
-			
+				display :flex;	
 			}
 		
 			.nav-item{
@@ -72,8 +74,10 @@
 				
 					<tr>
 						<td><label for="userId">User ID</label></td>
-						<td><input type="text" name="userId"></td>
-						<!--<td><button style="color: white;background: green;">Nested ID Check</button></td>  -->
+						<td>
+							<input type="text" id="userId" name="userId">
+							<button type="button" id="idChkBtn">중복  확인</button>
+						</td>
 					</tr>
 					
 					<tr>
@@ -93,7 +97,11 @@
 					
 					<tr>
 						<td><label for="userMail">email</label></td>
-						<td><input type="text" name="userMail"></td>
+						<td>
+							<input type="text" name="userMail">
+							<button type="button" id="emailAuthBtn">이메일 인증</button>
+							<button type="button" id="emailBtn">이메일 발송</button>
+						</td>
 					</tr>
 					
 					<tr>

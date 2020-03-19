@@ -48,5 +48,8 @@ public class MemberServiceImpl implements MemberService {
 		return mapper.detail(userId);
 	}
 	
-	
+	@Override
+	public String idChk(String userId) throws Exception {
+		return mapper.idChk(userId);
+	}
 }

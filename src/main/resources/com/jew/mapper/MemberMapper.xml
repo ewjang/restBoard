@@ -73,6 +73,15 @@
 		from member
 		where user_id=#{userId}
 	</delete>
+	
+	<select id="idChk" resultType="String">
+		select
+			 user_id
+		from 
+			member
+		where 
+			user_id=#{userId}
+	</select>
 </mapper>
 
 
