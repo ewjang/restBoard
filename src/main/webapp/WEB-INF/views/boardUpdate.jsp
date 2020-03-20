@@ -42,6 +42,9 @@
 			overflow:auto;
 		}
 	</style>
+	
+	<script src="//cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
+	
 </head>
 <body>
 	<h1 align="center">
@@ -84,7 +87,8 @@
 					<input type="text" class="form-title" placeholder="제목" name="boardTitle" value="${update.boardTitle }" maxlength="40">
 				</div>
 					<div>	
-					<textarea class="form-content" placeholder="내용" name="boardContent" maxlength="2000" style="height: 350px;">${update.boardContent }</textarea>
+					<textarea class="form-content" id="pcontent" name="boardContent" maxlength="2000" style="height: 350px;">${update.boardContent }</textarea>
+					<script type="text/javascript">CKEDITOR.replace('pcontent', {height: 400},{width:900});</script>
 					</div>
 					<input type="submit" value="등록">
 			</form>

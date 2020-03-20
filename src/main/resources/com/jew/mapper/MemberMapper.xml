@@ -82,6 +82,12 @@
 		where 
 			user_id=#{userId}
 	</select>
+	
+	<update id="verify">
+	 update member
+	 set authstatus=1
+	 where user_mail=#{userMail}
+	</update>
 </mapper>
 
 

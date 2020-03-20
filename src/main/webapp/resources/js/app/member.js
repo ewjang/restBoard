@@ -17,11 +17,11 @@ $(document).ready(function(){
 		$.ajax({
 			type : "GET",
 			url : "/member/idchk/"+$("#userId").val(),
-			contentType : "application/json; charset=UTF-8",
+			contentType : "application/text; charset=UTF-8",
 			success : function(data) {
 				console.log(data);
 				
-				alert(JSON.stringify(data));
+				alert(data);
 			},
 			error : function(xhr, status, error) {
 				alert("code:" + xhr.status + "\n"
@@ -30,5 +30,22 @@ $(document).ready(function(){
 			}
 		});
 	});
+	
+	$(function(){ 
+		 $('#pw1').keyup(function(){
+		      $('#chkNotice').html('');
+		    });
 
+		    $('#pw2').keyup(function(){
+
+		        if($('#pw1').val() != $('#pw2').val()){
+		          $('#chkNotice').html('비밀번호 일치하지 않음<br><br>');
+		          $('#chkNotice').attr('color', '#f82a2aa3');
+		        } else{
+		          $('#chkNotice').html('비밀번호 일치함<br><br>');
+		          $('#chkNotice').attr('color', '#199894b3');
+		        }
+
+		    });
+	});
 });

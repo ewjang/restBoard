@@ -14,4 +14,6 @@ public interface MemberMapper {
 	public Member detail(String userId) throws Exception;
 	public String idChk(String userId) throws Exception;
 	
+	public void verify(Member member) throws Exception;
+	
 }

@@ -14,6 +14,10 @@ public class Member {
 	private Date regDate;
 	private Date updDate;
 	
+	//mail인증
+	private String authkey;
+	private int authstatus;
+	
 	public String getUserId() {
 		return userId;
 	}
@@ -68,11 +72,25 @@ public class Member {
 	public void setUpdDate(Date updDate) {
 		this.updDate = updDate;
 	}
+	public String getAuthkey() {
+		return authkey;
+	}
+	public void setAuthkey(String authkey) {
+		this.authkey = authkey;
+	}
+	public int getAuthstatus() {
+		return authstatus;
+	}
+	public void setAuthstatus(int authstatus) {
+		this.authstatus = authstatus;
+	}
 	@Override
 	public String toString() {
 		return "Member [userId=" + userId + ", userPw=" + userPw + ", userName=" + userName + ", userMail=" + userMail
 				+ ", userBirth=" + userBirth + ", hobby=" + hobby + ", job=" + job + ", regDate=" + regDate
-				+ ", updDate=" + updDate + "]";
+				+ ", updDate=" + updDate + ", authkey=" + authkey + ", authstatus=" + authstatus + "]";
 	}
+
+	
 	
 }

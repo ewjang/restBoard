@@ -27,52 +27,30 @@ public class LoginController {
 	
 	@Autowired
 	LoginService service;
-		
-	//삭제 해야함....
-	@RequestMapping(value="/login/access")
-	public String userAccess(Member member, Model model) throws Exception{
-		
-		logger.info("userAccess");
-		
-		//view에서 넘어온 값 저장
-		String accessId=member.getUserId();
-		String accessPw=member.getUserPw();
-		
-		
-		if(accessId == null || accessPw == null) {
-			return "login";
-		}
-		
-		//DB조회 서비스 생성 넘어온 값과 매칭 시킴..
-		Member mem = service.match(accessId);
-
-		String chkId=mem.getUserId();
-		String chkPw=mem.getUserPw();
-		String chkNm=mem.getUserName();
-		
-		if((accessId.equals(chkId)) && (accessPw.equals(chkPw))) {
-			System.out.println(chkNm+"님이 로그인 했습니다.");
-			return "redirect:/board/list";
-		}else {
-			System.out.println("아이디/패스워드가 정확하지 않습니다. 로그인 실패하였습니다.");
-			return "login";
-		}	
-	}
-	
+			
 	@RequestMapping(value="/loginPost", method=RequestMethod.POST)
 	public ModelAndView loginPost(LoginDto dto) throws Exception{
 		
-		logger.info("loginPost",dto);
+		logger.info("login 이후 . . . ",dto);
 		ModelAndView mav=new ModelAndView();
 		try {
 			Member mem=service.login(dto);
 			if(mem != null) { //login 성공
-				mav.addObject("member", mem);
-				mav.addObject("loginResult","Login Success!!");
+				if(mem.getAuthstatus()==1) {
+					logger.info("인증 함.");
+					mav.addObject("member", mem);
+					mav.setViewName("login");
+					mav.addObject("loginResult","Login Success!!");
+				}else {
+					logger.info("인증 하지 않음.");
+					mav.setViewName("login");
+					mav.addObject("loginResult", "메일 인증을 하지 않았습니다.");
+				}
+				
 			}else {
-				mav.addObject("loginResult","Login fail!!");
+				mav.addObject("loginResult","Login fail");
 			}
-			mav.setViewName("login");
+			
 		} catch(Exception e){
 			e.printStackTrace();
 		}

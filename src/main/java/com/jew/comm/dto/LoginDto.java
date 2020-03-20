@@ -4,7 +4,14 @@ public class LoginDto {
 
 	private String userId;
 	private String userPw;
+	private int authstatus;
 	
+	public int getAuthstatus() {
+		return authstatus;
+	}
+	public void setAuthstatus(int authstatus) {
+		this.authstatus = authstatus;
+	}
 	public String getUserId() {
 		return userId;
 	}

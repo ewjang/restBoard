@@ -24,8 +24,6 @@ public interface BoardService {
 	public ArrayList<Board> mylist(@Param("board")Board board, @Param("cri") Criteria cri) throws Exception;
 
 	
-
-	
 	public int countBoardList() throws Exception;
 
 	public int countMyBoardList(Board board) throws Exception;

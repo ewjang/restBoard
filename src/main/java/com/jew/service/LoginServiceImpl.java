@@ -15,11 +15,6 @@ public class LoginServiceImpl implements LoginService{
 	
 	private static final String NS="com.jew.mapper.LoginMapper";
 	private static final String LOGIN=NS+".login";
-	
-	@Override
-	public Member match(String userId) throws Exception {
-		return mapper.match(userId);
-	}
 
 	@Override
 	public Member login(LoginDto dto) throws Exception {

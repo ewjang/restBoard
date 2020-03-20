@@ -32,10 +32,6 @@
 		</style>
 </head>
 
-
-<script src="/resources/js/jQuery-2.1.4.min.js"></script>
-<!-- <script src="/resources/js/lib/member.js"></script> -->
-
 <body>
 	<h1 align="center">
 		jew's webBoard  
@@ -70,54 +66,46 @@
 	
 		<div align="center" class="main">
 			<form action="/member/regist" method="post">
-				<table>
 				
-					<tr>
-						<td><label for="userId">User ID</label></td>
-						<td>
-							<input type="text" id="userId" name="userId">
-							<button type="button" id="idChkBtn">중복  확인</button>
-						</td>
-					</tr>
 					
-					<tr>
-						<td><label for="userPw">Password</label></td>
-						<td><input type="Password" name="userPw"></td>
-					</tr>
+						<label for="userId">유저 ID</label>
+						<input type="text" id="userId" name="userId" required>
+						<button type="button" id="idChkBtn">중복  확인</button>
+						<br/>
+						
+						<label for="userPw">비밀번호</label>
+						<input type="Password" class="pw" id="pw1" name="userPw" required>
+						<br/>
+						
+						<label for="userPw">비밀번호 확인</label>
+						<input type="Password" id="pw2" required>
+						<br/>
 					
-					<tr>
-						<td><label for="userName">Name</label></td>
-						<td><input type="text" name="userName"></td>
-					</tr>
+						<font id="chkNotice" size="2"></font>
+						<br/>
 					
-					<tr>
-						<td><label for="job">Job</label></td>   <!-- 콤보박스  -->
-						<td><input type="text" name="job"></td>
-					</tr>
-					
-					<tr>
-						<td><label for="userMail">email</label></td>
-						<td>
-							<input type="text" name="userMail">
-							<button type="button" id="emailAuthBtn">이메일 인증</button>
-							<button type="button" id="emailBtn">이메일 발송</button>
-						</td>
-					</tr>
-					
-					<tr>
-						<td><label for="userBirth">Birth</label></td>
-						<td><input type="text" name="userBirth"></td>
-					</tr>
-					
-					<tr>
-						<td><label for="hobby">Hobby</label></td>
-						<td><input type="text" name="hobby"></td>  <!-- 콤보박스  -->
-					</tr>
-				
-				</table>
-				
+						<label for="userName">이름</label>
+						<input type="text" name="userName" required>
+						<br/>
+						
+						<label for="job">직업</label>
+						<input type="text" name="job">
+						<br/>
+						
+						<label for="userMail">메일</label>
+						<input type="email" id="userMail" name="userMail" placeholder="*본인 인증용 이메일*" required>
+						<br/>
+						
+						<label for="userBirth">생년월일</label>
+						<input type="date" name="userBirth">
+						<br/>
+											
+						<label for="hobby">취미</label>
+						<input type="text" name="hobby">
+						<br/>
+						
 				<button style="color:white;background-color: green;">등록</button>
-				<!-- <input style="color: white;background-color: green;" type="button" value="등록" id="memberRegistBtn"/> -->
+				
 			</form>
 			<br>
 		</div>

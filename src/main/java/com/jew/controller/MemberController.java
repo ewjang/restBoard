@@ -2,47 +2,41 @@ package com.jew.controller;
 
 
 
+import javax.inject.Inject;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.jew.domain.Member;
-import com.jew.mapper.MemberMapper;
 import com.jew.service.CalenderService;
 import com.jew.service.MemberService;
+import com.jew.utils.MailUtils;
 
 
 @Controller
 public class MemberController {
 	
 	private static final Logger logger=LoggerFactory.getLogger(MemberController.class);
-
 	
 	@Autowired
 	MemberService service;
 	
+	@Inject
+	JavaMailSender mailSender;
+	
 	@Autowired
 	CalenderService calenderService;
-	
-	private final ApplicationContext applicationContext;
-	
-	public  MemberController(ApplicationContext applicationContext) {
-		this.applicationContext=applicationContext;
-	}
-	
-	@GetMapping("/member/bean")
-	@ResponseBody
-	public String bean() {
-		return "bean: "+applicationContext.getBean(MemberMapper.class);
-	}
 	
 	@RequestMapping(value="/member/idchk/{userId}", method=RequestMethod.GET,  produces = "application/text; charset=utf8")
 	@ResponseBody
@@ -65,16 +59,39 @@ public class MemberController {
 	@RequestMapping(value="/member/regist", method = RequestMethod.POST)
 	public String register(Member member) throws Exception {
 		
-		logger.info("member regist");
-		logger.info("Invalid bound statement :"+service.countAll());
-		
+		logger.info("member regist . . .");
+
 		if(service.countAll()==0) {
 			service.setAdmin(member);
 		}else {
-			service.register(member);
+			service.create(member);
 		}
+		
+		MailUtils sendMail=new MailUtils(mailSender);
+		sendMail.setSubject("[ 이메일 인증 ] " +member.getUserName()+"님 jew's Web Board 가입을 환영합니다.");
+		sendMail.setText( // 메일내용
+				"<h1>메일인증(아래를 클릭하시면 인증이 완료되며 웹 게시판에 로그인이 가능합니다.</h1>" +
+				"<a href='http://localhost:8080/verify.do?userMail=" + member.getUserMail() +
+				"' target='_blenk'>이메일 인증 확인</a>");
+		sendMail.setFrom("jew8969@gmail.com", "장은우"); //보내는 이
+		sendMail.setTo(member.getUserMail()); //받는이
+		sendMail.send();
+								
+		return "mailAuthWait";
+	}
+	
+	@RequestMapping(value="/verify.do", method=RequestMethod.GET)
+	public String signSuccess(@RequestParam String userMail) throws Exception {
+		logger.info("이메일 인증 기능 처리 . . . ");
+		logger.info("userMail ..  "+userMail);
+		 Member member=new Member();
+		 member.setUserMail(userMail);
+		 service.verify(member);
+		
 		return "login";
 	}
+	
+	
 	@RequestMapping(value="/member/update/{userId}" , method=RequestMethod.GET)
 	public ModelAndView updMember(@PathVariable("userId") String userId ) throws Exception{
 		
@@ -100,4 +117,5 @@ public class MemberController {
 		return "home";
 	}
 
+	
 }

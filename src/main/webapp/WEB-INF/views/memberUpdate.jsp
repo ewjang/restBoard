@@ -33,7 +33,7 @@
 
 
 <script src="/resources/js/jQuery-2.1.4.min.js"></script>
-<!-- <script src="/resources/js/lib/member.js"></script> -->
+
 
 <body>
 		<h1 align="center">
@@ -78,12 +78,12 @@
 					
 					<tr>
 						<td><label for="userPw">Password</label></td>
-						<td><input type="Password" name="userPw"></td>
+						<td><input type="Password" name="userPw" required></td>
 					</tr>
 					
 					<tr>
 						<td><label for="userName">Name</label></td>
-						<td><input type="text" name="userName" value="${update.userName }"></td>
+						<td><input type="text" name="userName" value="${update.userName }" required></td>
 					</tr>
 					
 					<tr>
@@ -93,12 +93,12 @@
 					
 					<tr>
 						<td><label for="userMail">email</label></td>
-						<td><input type="text" name="userMail" value="${update.userMail }"></td>
+						<td><input type="email" name="userMail" value="${update.userMail }" required></td>
 					</tr>
 					
 					<tr>
 						<td><label for="userBirth">Birth</label></td>
-						<td><input type="text" name="userBirth" value="${update.userBirth }"></td>
+						<td><input type="date" name="userBirth" value="${update.userBirth }"></td>
 					</tr>
 					
 					<tr>
