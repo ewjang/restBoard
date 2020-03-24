@@ -45,5 +45,7 @@
 		</interceptor>
 	</interceptors>
 	
+	<!--ckeditor  -->
+	<resources location="/WEB-INF/views/ckeditor/" mapping="/ckeditor/**"></resources>
 	
 </beans:beans>

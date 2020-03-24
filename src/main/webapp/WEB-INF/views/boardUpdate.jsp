@@ -9,41 +9,10 @@
 <title>Board Write</title>
 
 	<style>
-		.nav{
-			height : 70px;
-			display : flex;
-			border-bottom : 1px solid black;
-			align-items : center;
-		}
-		
-		.nav-right-items{
-			margin-left : auto;
-			display :flex;
-		
-		}
-		
-		.nav-item{
-			margin-left : 10px;
-		}
-		
-		.container{
-			margin-top : 150px;
-		}
-		
-		.form-title{
-			width : 900px;
-		}
-		
-		.form-content{
-			height : 400px;
-			width : 900px;
-			align-items :center;
-			margin-top : 10px;
-			overflow:auto;
-		}
 	</style>
 	
-	<script src="//cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
+	<script src = "${path}/ckeditor/ckeditor.js"></script>	
+	<link rel="stylesheet" href="/resources/css/boardUpdate.css">
 	
 </head>
 <body>

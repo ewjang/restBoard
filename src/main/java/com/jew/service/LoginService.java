@@ -6,5 +6,7 @@ import com.jew.domain.Member;
 public interface LoginService {
 	
 	public Member login(LoginDto dto) throws Exception;
+
+	public Member accountchk(LoginDto dto) throws Exception;
 	
 }

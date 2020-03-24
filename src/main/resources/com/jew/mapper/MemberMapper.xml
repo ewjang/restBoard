@@ -13,7 +13,10 @@
 				job,
 				user_mail,
 				user_birth,
-				hobby
+				hobby,
+				addr1,
+				addr2,
+				addr3
 			)
 		values(
 			#{userId},
@@ -22,7 +25,10 @@
 			#{job},
 			#{userMail},
 			#{userBirth},
-			#{hobby}
+			#{hobby},
+			#{addr1},
+			#{addr2},
+			#{addr3}
 		    )
 	</insert>
 	
@@ -40,6 +46,12 @@
 		select count(*)
 		from member
 	</select>
+
+	<update id="verify">
+	 update member
+	 set authstatus=1
+	 where user_mail=#{userMail}
+	</update>
 	
 	<select id="detail" resultType="com.jew.domain.Member">	
 		select 
@@ -49,7 +61,10 @@
 			job,
 			user_mail,
 			user_birth,
-			hobby
+			hobby,
+			addr1,
+			addr2,
+			addr3
 		from
 			member
 		where 
@@ -63,8 +78,10 @@
 		 	   job=#{job},
 		 	   user_mail=#{userMail},
 		 	   user_birth=#{userBirth},
-			   hobby=#{hobby}
-		
+			   hobby=#{hobby},
+			   addr1=#{addr1},
+			   addr2=#{addr2},
+			   addr3=#{addr3}
 		where user_id=#{userId} 		   
 	</update>
 	
@@ -82,12 +99,7 @@
 		where 
 			user_id=#{userId}
 	</select>
-	
-	<update id="verify">
-	 update member
-	 set authstatus=1
-	 where user_mail=#{userMail}
-	</update>
+
 </mapper>
 
 

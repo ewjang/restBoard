@@ -6,42 +6,12 @@
 <meta charset="UTF-8">
 <title>Board Write</title>
 
-	<style>
-		.nav{
-			height : 70px;
-			display : flex;
-			border-bottom : 1px solid black;
-			align-items : center;
-		}
-		
-		.nav-right-items{
-			margin-left : auto;
-			display :flex;
-		
-		}
-		
-		.nav-item{
-			margin-left : 10px;
-		}
 
-		.container{
-			margin-top : 80px;
-		}
-		.form-title{
-			width : 900px;
-		}
-		.form-content{
-			height : 400px;
-			width : 900px;
-			align-items :center;
-			margin-top : 10px;
-			overflow:auto;
-		}
-	</style>
+	<!--<script src="//cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>  -->
+	<script src = "${path}/ckeditor/ckeditor.js"></script>	
+	<link rel="stylesheet" href="/resources/css/boardwrite.css">
 	
-	<script src="//cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
-	
-	
+		
 </head>
 <body>
 	<h1 align="center">
@@ -81,8 +51,8 @@
 				<div>
 					<span>작성자 : ${loginUser.userId }</span>
 					<span>등록일자 : <%=request.getAttribute("calldate") %></span>
-					<br/>	
-			 		<input type="text" class="form-title" placeholder="제목" name="boardTitle" maxlength="40">
+					<br/>
+					<input type="text" class="form-title" placeholder="제목" name="boardTitle" maxlength="40">
 				</div>
 					<div>	
 						<textarea class="form-content" id="pcontent" placeholder="내용" name="boardContent" maxlength="2000"></textarea>

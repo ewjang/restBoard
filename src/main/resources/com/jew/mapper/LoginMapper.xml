@@ -12,6 +12,15 @@
 		from member
 		where user_id=#{userId} and user_pw=#{userPw}
 	</select>
+	
+	<select id="accountchk" resultType="com.jew.domain.Member">
+		select
+			user_id,
+			user_pw
+			authstatus
+		from member
+		where user_id=#{userId}
+	</select>
 
 </mapper>
 

@@ -6,35 +6,8 @@
 		<meta charset="UTF-8">
 		<title>Login</title>
 		
-	<style>
-		.nav{
-			height : 70px;
-			display : flex;
-			border-bottom : 1px solid black;
-			align-items : center;
-		}
+		<link rel="stylesheet" href="/resources/css/login.css">
 		
-		.nav-right-items{
-			margin-left : auto;
-			display :flex;
-		
-		}
-		
-		.nav-item{
-			margin-left : 10px;
-		}
-		
-		
-		.main{
-			margin-top : 230px;
-			align-items : center;
-		}
-		
-		.btn{
-			display :flex;
-		}
-	
-	</style>
 </head>
 <body>
 	<h1 align="center">
@@ -63,11 +36,11 @@
 		</div>	
 	</div>
 	
-	<h1 align="center">
-		로그인 화면  
-	</h1>
+
 	
-	<div align="center" class="main">
+	<div class="sign-in-form">
+		<h1>로그인 화면 </h1>
+		
 		<form action="/loginPost" method="POST">
 		
 			<%if(session.getAttribute("loginUser")==null){ %>
@@ -75,25 +48,21 @@
 				${ loginResult }
 			</div>
 			<%} %>
+					
+			<!--아이디 -->
+			<input type="text" class="input-box" name="userId" placeholder="아이디를 입력해주세요." required>
+			<!--비밀번호  -->
+			<input type="password" class="input-box" name="userPw" placeholder="비밀번호를 입력해주세요." required>
+				
+			<label for="userCookie">
+				<input type="checkbox" id="useCookie" name="useCookie" />Remember
+			</label>
 			
-			<div>	
-				<label for="userId">userId</label>
-				<input type="text" name="userId">
-			</div>
-			<div>
-				<label for="password">password</label>
-				<input type="password" name="userPw">
-			</div>
-			<div>
-				<label for="userCookie">
-					<input type="checkbox" id="useCookie" name="useCookie" />Remember
-				</label>
-			</div>	
-			<div>	
-				 <button class="btn" style="color: white;background: green;">로그인</button>
-			</div>
+			<br/>
+			<button class="btn" style="color: white;background: green;">로그인</button>			
 		</form>
-				 <button class="btn" style="color: white;background: green;" onclick="location.href='/views/memberPageGo'">회원가입</button>	
+			<hr>
+			<button class="btn" style="color: white;background: green;" onclick="location.href='/views/memberPageGo'">회원가입</button>	
 	</div>
 
 </body>

@@ -32,7 +32,7 @@ $(document).ready(function(){
 	});
 	
 	$(function(){ 
-		 $('#pw1').keyup(function(){
+		 	$('#pw1').keyup(function(){
 		      $('#chkNotice').html('');
 		    });
 

@@ -18,8 +18,14 @@ public class LoginServiceImpl implements LoginService{
 
 	@Override
 	public Member login(LoginDto dto) throws Exception {
-		System.out.println("★★★★★★★★★★★★★★★★★★ : "+dto.getUserId());
+		
 		return mapper.login(dto);
+	}
+	
+	@Override
+	public Member accountchk(LoginDto dto) throws Exception {
+		
+		return mapper.accountchk(dto);
 	}
 	
 }

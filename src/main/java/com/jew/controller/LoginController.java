@@ -35,22 +35,26 @@ public class LoginController {
 		ModelAndView mav=new ModelAndView();
 		try {
 			Member mem=service.login(dto);
-			if(mem != null) { //login 성공
+			mav.setViewName("login");
+			if(mem != null) { //login 성공	
 				if(mem.getAuthstatus()==1) {
-					logger.info("인증 함.");
-					mav.addObject("member", mem);
-					mav.setViewName("login");
+					logger.info("인증 함..");
+					mav.addObject("member", mem);	
 					mav.addObject("loginResult","Login Success!!");
 				}else {
 					logger.info("인증 하지 않음.");
-					mav.setViewName("login");
 					mav.addObject("loginResult", "메일 인증을 하지 않았습니다.");
 				}
-				
 			}else {
-				mav.addObject("loginResult","Login fail");
+				Member accountchk=service.accountchk(dto);
+				if(accountchk!=null) {
+					logger.info("계정이 있지만 비밀번호가 틀린 경우..");
+					mav.addObject("loginResult", "비밀번호가 틀렸습니다.");
+				}else {
+					logger.info("계정이 없는 경우..");
+					mav.addObject("loginResult","계정이 없습니다. 회원가입을 해주세요.");
+				}
 			}
-			
 		} catch(Exception e){
 			e.printStackTrace();
 		}

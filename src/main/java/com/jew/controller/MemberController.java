@@ -9,8 +9,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -41,8 +39,6 @@ public class MemberController {
 	@RequestMapping(value="/member/idchk/{userId}", method=RequestMethod.GET,  produces = "application/text; charset=utf8")
 	@ResponseBody
 	public String idChk(@PathVariable("userId") String userId) throws Exception{
-		
-		logger.info("컨트롤러확인 : " + userId);
 		
 		String temp=service.idChk(userId);
 		
@@ -83,7 +79,7 @@ public class MemberController {
 	@RequestMapping(value="/verify.do", method=RequestMethod.GET)
 	public String signSuccess(@RequestParam String userMail) throws Exception {
 		logger.info("이메일 인증 기능 처리 . . . ");
-		logger.info("userMail ..  "+userMail);
+
 		 Member member=new Member();
 		 member.setUserMail(userMail);
 		 service.verify(member);
