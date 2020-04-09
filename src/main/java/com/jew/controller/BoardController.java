@@ -23,6 +23,8 @@ import com.jew.domain.Reply;
 import com.jew.service.BoardService;
 import com.jew.service.CalenderService;
 
+import io.swagger.annotations.ApiOperation;
+
 @Controller
 public class BoardController implements SessionKeys{
 	
@@ -34,7 +36,17 @@ public class BoardController implements SessionKeys{
 	@Autowired
 	private CalenderService clservice; //오늘 시스템 날짜 조회
 	
+	
+	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@ApiOperation(value="홈 화면 이동")
+	public String home() {
+		logger.info("home ..");
+		return "home";
+		
+	}
+	
 	@RequestMapping(value="/board/list" ,method=RequestMethod.GET)
+	@ApiOperation(value="게시판 리스트")
 	public ModelAndView list(Board board, Criteria cri, HttpSession session) throws Exception {
 			
 		logger.info("board list");
@@ -67,6 +79,7 @@ public class BoardController implements SessionKeys{
 	}
 	
 	@RequestMapping(value="/board/mylist" ,method=RequestMethod.GET)
+	@ApiOperation(value="게시판 나의 글 리스트")
 	public ModelAndView myList(Board board, Criteria cri, HttpSession https) throws Exception {
 			
 		logger.info("board mylist");
@@ -97,6 +110,7 @@ public class BoardController implements SessionKeys{
 	
 	
 	@RequestMapping(value="/board/write" ,method=RequestMethod.GET)
+	@ApiOperation(value="게시판 글 쓰기 화면")
 	public String write(Model model) throws Exception{
 		logger.info("board write page");
 		
@@ -104,20 +118,19 @@ public class BoardController implements SessionKeys{
 		logger.info("Date : "+ calldate);
 		
 		model.addAttribute("calldate",clservice.callDate());
-		//ModelAndView mav =new ModelAndView();
-		//mav.setViewName("boardWrite");
-		//mav.addObject("calldate",clservice.callDate());
-		
+
 		return "boardWrite";
 	}
 	
-	@RequestMapping(value="/board/update/{boardNo}/{userId}" ,method=RequestMethod.POST)
+	@RequestMapping(value="/board/update/{boardNo}" ,method=RequestMethod.PUT)
+	@ApiOperation(value="게시판 글 수정")
 	public String update(Board board) throws Exception {	
 		service.update(board);
 		return "redirect:/board/list";
 	}
 	
 	@RequestMapping(value="/board/update/{boardNo}" ,method=RequestMethod.GET)
+	@ApiOperation(value="게시판 글 수정 화면")
 	public ModelAndView updDetail(@PathVariable("boardNo") int boardNo) throws Exception {
 		logger.info("board update  . . . ");	
 		ModelAndView mav=new ModelAndView();
@@ -126,7 +139,8 @@ public class BoardController implements SessionKeys{
 		return mav;
 	}
 	
-	@RequestMapping(value="/board/delete/{boardNo}")
+	@RequestMapping(value="/board/delete/{boardNo}",method=RequestMethod.DELETE)
+	@ApiOperation(value="게시판 글 삭제")
 	public String delete(@PathVariable("boardNo") String boardNo) throws Exception {
 		logger.info("board delete page");
 		logger.info("boardNo : "+boardNo);
@@ -135,6 +149,7 @@ public class BoardController implements SessionKeys{
 	}
 	
 	@RequestMapping(value="/board/create",method=RequestMethod.POST)
+	@ApiOperation(value="게시판 글 작성")
 	public String create(Board board, HttpSession https) throws Exception {
 		
 		logger.info("board create!!");
@@ -153,6 +168,7 @@ public class BoardController implements SessionKeys{
 		return "redirect:/board/list";
 	}
 	@RequestMapping(value="/board/detail/{boardNo}" ,method=RequestMethod.GET)
+	@ApiOperation(value="게시판 글 상세보기")
 	public ModelAndView detail(@PathVariable("boardNo") int boardNo, Criteria cri) throws Exception {
 		logger.info("board detail page");
 		logger.info("boardNo : "+boardNo);
@@ -172,6 +188,7 @@ public class BoardController implements SessionKeys{
 		return mav;
 	}
 	@RequestMapping(value="/board/reply/create/{boardNo}", method=RequestMethod.POST)
+	@ApiOperation(value="댓글 작성")
 	public String create(@PathVariable int boardNo ,Reply reply, HttpSession https) throws Exception{
 		
 		logger.info("board reply create . . .");
@@ -184,7 +201,8 @@ public class BoardController implements SessionKeys{
 		return "redirect:/board/detail/"+boardNo;
 	}
 	
-	@RequestMapping(value="/board/reply/delete/{boardNo}/{replyNo}")
+	@RequestMapping(value="/board/reply/delete/{boardNo}/{replyNo}",method=RequestMethod.DELETE)
+	@ApiOperation(value="댓글 삭제")
 	public String delete(@PathVariable int replyNo , @PathVariable int boardNo, Reply reply)throws Exception{
 		//redirect에 활용하기위해 boardno 경로로 파라미터 받음
 		logger.info("board reply delete . . . ");

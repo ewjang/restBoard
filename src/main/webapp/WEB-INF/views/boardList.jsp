@@ -54,10 +54,10 @@
 		<div class="nav-right-items">	
 				<% if( session.getAttribute("loginUser")==null){ %>
 					<div class="nav-item">
-						<a href="/views/loginPageGo" style="text-decoration:none">로그인</a>
+						<a href="/login" style="text-decoration:none">로그인</a>
 					</div>
 					<div class="nav-item">
-						<a href="/views/memberPageGo" style="text-decoration:none">회원가입</a>
+						<a href="/member/regist" style="text-decoration:none">회원가입</a>
 					</div>		
 				<% } else { %>
 					<div class="nav-item">
@@ -96,8 +96,14 @@
 							<span class="cell col5">${board.updDate }</span>
 							<span class="cell col6">
 							<c:if test="${loginUser.userId==board.userId }">
-								<button id="updBtn" style="color: white;background: blue;" onclick="location.href='/board/update/${board.boardNo}'" >수정</button>
-								<button id="delBtn" style="color: white;background: red;" onclick="location.href='/board/delete/${board.boardNo}'" >삭제</button>
+								<form action="/board/update/${board.boardNo}" method="GET">
+									<button id="updBtn" style="color: white;background: blue;" onclick="location.href='/board/update/${board.boardNo}'" >수정</button>
+								</form>
+								<form action="/board/delete/${board.boardNo}" method="POST">
+									<input type="hidden" name="_method" value="delete"/>
+									<input id="delBtn" type="submit" style="color: white;background: red;" value="삭제"/>
+								<!--<button id="delBtn" style="color: white;background: red;">삭제</button> -->
+								</form>
 							</c:if>
 							</span>
 						</div>

@@ -77,10 +77,10 @@
 		<div class="nav-right-items">	
 				<% if( session.getAttribute("loginUser")==null){ %>
 					<div class="nav-item">
-						<a href="/views/loginPageGo" style="text-decoration:none">로그인</a>
+						<a href="/login" style="text-decoration:none">로그인</a>
 					</div>
 					<div class="nav-item">
-						<a href="/views/memberPageGo" style="text-decoration:none">회원가입</a>
+						<a href="/member/regist" style="text-decoration:none">회원가입</a>
 					</div>		
 				<% } else { %>
 					<div class="nav-item">
@@ -115,19 +115,23 @@
 	<div class="container-reply">
 		<form action="/board/reply/create/${detail.boardNo}" method="post">
 			<div class="container-reply-1">
-				<h6>${loginUser.userId}님의 Comment<h6>
+				<h6>${loginUser.userId}님의 Comment</h6>
 				<textarea class="form-reply-textarea" type="text" placeholder="댓글을 입력하세요." name="replyContent"></textarea>
 				<button>입력</button>
 			</div>
 		</form>
 		
+		
 		<c:forEach items="${rep}" var="reply">
 			<div class="container-replay-2">
-				<h6>${reply.userId}<h6>
+				<h6>${reply.userId}</h6>
 				<h6>${reply.regDate }</h6>
 				${reply.replyContent }
 				<c:if test="${loginUser.userId==reply.userId }">
-					<button onclick="location.href='/board/reply/delete/${detail.boardNo}/${reply.replyNo}'">댓글 삭제</button>
+					<form action="/board/reply/delete/${detail.boardNo}/${reply.replyNo}" method="post">
+						<input type="hidden" name="_method" value="delete" />
+						<button type="submit">댓글 삭제</button>
+					</form>
 				</c:if>	
 				
 			</div>

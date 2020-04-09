@@ -63,10 +63,10 @@
 			<div class="nav-right-items">	
 					<% if( session.getAttribute("loginUser")==null){ %>
 						<div class="nav-item">
-							<a href="/views/loginPageGo" style="text-decoration:none">로그인</a>
+							<a href="/login" style="text-decoration:none">로그인</a>
 						</div>
 						<div class="nav-item">
-							<a href="/views/memberPageGo" style="text-decoration:none">회원가입</a>
+							<a href="/member/regist" style="text-decoration:none">회원가입</a>
 						</div>		
 					<% } else { %>
 						<div class="nav-item">
@@ -84,8 +84,8 @@
 		
 		<div class="sign-up-form">
 			<h1>회원정보 수정</h1>
-			<form action="/member/update" method="post">
-	
+			<form action="/member/update" method="POST">
+				
 				<!-- 유저 아이디  -->
 				<div class="">
 				<input type="text" class="input-box" id="userId" name="userId" value="${update.userId }" readonly="readonly">
@@ -135,11 +135,19 @@
 				<!-- 취미 -->
 				<input type="text" class="input-box" name="hobby" value="${update.hobby }" placeholder="취미">
 				<br/>
-						
-				<button style="color:white;background-color: green;">수정 등록</button>
+				
+				<div>
+					<input type="hidden" name="_method" value="put" />
+					<button type="submit" style="color:white;background-color: green;">수정 등록</button>
+				</div>
 				<hr/>
 			</form>
-				<button style="color:white;background-color: black;" onclick="location.href='/member/delete/${update.userId}'">계정 삭제</button>
+			<form action="/member/delete/${update.userId }" method="POST">
+				<div>
+					<input type="hidden" name="_method" value="delete" />
+					<button type="submit" style="color:white;background-color: black;">계정 삭제</button>
+				</div>
+			</form>
 		</div>
 </body>
 </html>

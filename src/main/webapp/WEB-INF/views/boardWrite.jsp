@@ -22,10 +22,10 @@
 		<div class="nav-right-items">	
 				<% if( session.getAttribute("loginUser")==null){ %>
 					<div class="nav-item">
-						<a href="/views/loginPageGo" style="text-decoration:none">로그인</a>
+						<a href="/login" style="text-decoration:none">로그인</a>
 					</div>
 					<div class="nav-item">
-						<a href="/views/memberPageGo" style="text-decoration:none">회원가입</a>
+						<a href="/member/regist" style="text-decoration:none">회원가입</a>
 					</div>		
 				<% } else { %>
 					<div class="nav-item">

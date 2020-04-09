@@ -21,6 +21,8 @@ import com.jew.service.CalenderService;
 import com.jew.service.MemberService;
 import com.jew.utils.MailUtils;
 
+import io.swagger.annotations.ApiOperation;
+
 
 @Controller
 public class MemberController {
@@ -36,7 +38,15 @@ public class MemberController {
 	@Autowired
 	CalenderService calenderService;
 	
+	@RequestMapping(value="/member/regist" , method=RequestMethod.GET)
+	@ApiOperation(value="회원가입 화면 이동")
+	public String memberPage() {
+		logger.info("memberPageGo");
+		return "member";
+	}
+	
 	@RequestMapping(value="/member/idchk/{userId}", method=RequestMethod.GET,  produces = "application/text; charset=utf8")
+	@ApiOperation(value="회원가입 아이디 중복 체크")
 	@ResponseBody
 	public String idChk(@PathVariable("userId") String userId) throws Exception{
 		
@@ -53,6 +63,7 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="/member/regist", method = RequestMethod.POST)
+	@ApiOperation(value="회원가입")
 	public String register(Member member) throws Exception {
 		
 		logger.info("member regist . . .");
@@ -67,7 +78,7 @@ public class MemberController {
 		sendMail.setSubject("[ 이메일 인증 ] " +member.getUserName()+"님 jew's Web Board 가입을 환영합니다.");
 		sendMail.setText( // 메일내용
 				"<h1>메일인증(아래를 클릭하시면 인증이 완료되며 웹 게시판에 로그인이 가능합니다.</h1>" +
-				"<a href='http://localhost:8080/verify.do?userMail=" + member.getUserMail() +
+				"<a href='http://localhost:8080//member/verify?userMail=" + member.getUserMail() +
 				"' target='_blenk'>이메일 인증 확인</a>");
 		sendMail.setFrom("jew8969@gmail.com", "장은우"); //보내는 이
 		sendMail.setTo(member.getUserMail()); //받는이
@@ -76,7 +87,8 @@ public class MemberController {
 		return "mailAuthWait";
 	}
 	
-	@RequestMapping(value="/verify.do", method=RequestMethod.GET)
+	@RequestMapping(value="/member/verify", method=RequestMethod.GET)
+	@ApiOperation(value="메일 인증")
 	public String signSuccess(@RequestParam String userMail) throws Exception {
 		logger.info("이메일 인증 기능 처리 . . . ");
 
@@ -84,11 +96,12 @@ public class MemberController {
 		 member.setUserMail(userMail);
 		 service.verify(member);
 		
-		return "login";
+		return "redirect:/";
 	}
 	
 	
 	@RequestMapping(value="/member/update/{userId}" , method=RequestMethod.GET)
+	@ApiOperation(value="회원 수정 화면")
 	public ModelAndView updMember(@PathVariable("userId") String userId ) throws Exception{
 		
 		logger.info("Member update page...");		
@@ -99,18 +112,20 @@ public class MemberController {
 		return mav;
 	}
 
-	@RequestMapping(value="/member/update", method = RequestMethod.POST)
+	@RequestMapping(value="/member/update", method = RequestMethod.PUT)
+	@ApiOperation(value="회원 수정")
 	public String update(Member member) throws Exception {
 		logger.info("Member update . . . ");
 		service.update(member);		
-		return "home";
+		return "redirect:/board/list";
 	}
 	
-	@RequestMapping(value="/member/delete/{userId}")
+	@RequestMapping(value="/member/delete/{userId}", method=RequestMethod.DELETE)
+	@ApiOperation(value="회원 탈퇴")
 	public String delete(@PathVariable("userId") String userId) throws Exception{	
 		logger.info("Member delete . . .");
 		service.delete(userId);		
-		return "home";
+		return "redirect:/";
 	}
 
 	

@@ -12,7 +12,7 @@
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	<bean id="dataSource" name="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
-		<property name="url" value="jdbc:mysql://127.0.0.1:3306/carexpo?zeroDateTimeBehavior=convertToNull"></property>
+		<property name="url" value="jdbc:mysql://127.0.0.1:4000/carexpo?zeroDateTimeBehavior=convertToNull"></property>
 		<property name="username" value="jew8960"></property>
 		<property name="password" value="1234"></property>
 	</bean>
@@ -25,12 +25,7 @@
 	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg index="0" ref="sqlSessionFactory"></constructor-arg>
 	</bean>
-	<!-- 
-	<bean id="Mapper" name="memberMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
-		<property name="mapperInterface" value="com.jew.mapper.MemberMapper"/>
-		<property name="sqlSessionFactory" ref="sqlSessionFactory"/>
-	</bean>
-	 -->
+
 	<mybatis-spring:scan base-package="com.jew.mapper"/>
 	
 	

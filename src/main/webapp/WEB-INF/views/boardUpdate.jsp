@@ -24,10 +24,10 @@
 		<div class="nav-right-items">	
 				<% if( session.getAttribute("loginUser")==null){ %>
 					<div class="nav-item">
-						<a href="/views/loginPageGo" style="text-decoration:none">로그인</a>
+						<a href="/login" style="text-decoration:none">로그인</a>
 					</div>
 					<div class="nav-item">
-						<a href="/views/memberPageGo" style="text-decoration:none">회원가입</a>
+						<a href="/member/regist" style="text-decoration:none">회원가입</a>
 					</div>		
 				<% } else { %>
 					<div class="nav-item">
@@ -48,17 +48,19 @@
 	</h1>
 
 	<div class="container" align="center">
-			<form action="/board/update/${update.boardNo}/${update.userId}" method="post">
+			<form action="/board/update/${update.boardNo}" method="POST">
+				
 				<div>
 					<span>작성자 : ${update.userId }</span>
 					<span>등록일자 : ${update.regDate }</span>
 					<br/>
 					<input type="text" class="form-title" placeholder="제목" name="boardTitle" value="${update.boardTitle }" maxlength="40">
 				</div>
-					<div>	
+				<div>	
 					<textarea class="form-content" id="pcontent" name="boardContent" maxlength="2000" style="height: 350px;">${update.boardContent }</textarea>
 					<script type="text/javascript">CKEDITOR.replace('pcontent', {height: 400},{width:900});</script>
-					</div>
+				</div>
+					<input type="hidden" name="_method" value="put" />
 					<input type="submit" value="등록">
 			</form>
 	</div>

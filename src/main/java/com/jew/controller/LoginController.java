@@ -20,6 +20,8 @@ import com.jew.comm.interceptor.SessionKeys;
 import com.jew.domain.Member;
 import com.jew.service.LoginService;
 
+import io.swagger.annotations.ApiOperation;
+
 @Controller
 public class LoginController {
 	
@@ -27,8 +29,20 @@ public class LoginController {
 	
 	@Autowired
 	LoginService service;
-			
+	
+	@RequestMapping(value="/login" , method=RequestMethod.GET)
+	@ApiOperation(value="로그인 화면")
+	public String loginPage(String name, Model model) {
+		
+		logger.info("loginPageGo");
+		System.out.println(name);
+		model.addAttribute("name",name);
+		
+		return "login";
+	}
+	
 	@RequestMapping(value="/loginPost", method=RequestMethod.POST)
+	@ApiOperation(value="로그인 실패 화면")
 	public ModelAndView loginPost(LoginDto dto) throws Exception{
 		
 		logger.info("login 이후 . . . ",dto);
@@ -62,6 +76,7 @@ public class LoginController {
 	}
 	
 	@RequestMapping(value="/logout" , method=RequestMethod.GET)
+	@ApiOperation(value="로그아웃")
 	public String logout(HttpSession session, HttpServletRequest request, HttpServletResponse response) throws Exception{
 		logger.info("logout get !!! ");
 		session.removeAttribute(SessionKeys.LOGIN);
