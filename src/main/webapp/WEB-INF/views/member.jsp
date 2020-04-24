@@ -86,9 +86,9 @@
 			<form action="/member/regist" method="post">
 				
 				<!-- 유저 아이디 -->
-				<div class="">
-				<input type="text" class="input-box" id="userId" name="userId" placeholder="아이디" required>
-				<button class="smallbtn"type="button" id="idChkBtn">확인</button>
+				<div>
+					<input type="text" class="input-box" id="userId" name="userId" placeholder="아이디" required>
+					<button class="smallbtn"type="button" id="idChkBtn">확인</button>
 				</div>
 				<br/>
 				

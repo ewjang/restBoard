@@ -10,7 +10,7 @@
 	<properties>
 		<java-version>1.8</java-version>
 		<org.springframework-version>5.0.7.RELEASE</org.springframework-version>
-		<org.aspectj-version>1.6.10</org.aspectj-version>
+		<org.aspectj-version>1.7.4</org.aspectj-version>
 		<org.slf4j-version>1.6.6</org.slf4j-version>
 		<apachetiles.version>3.0.5</apachetiles.version>
 	</properties>
@@ -39,7 +39,19 @@
 			<groupId>org.aspectj</groupId>
 			<artifactId>aspectjrt</artifactId>
 			<version>${org.aspectj-version}</version>
-		</dependency>	
+		</dependency>
+		
+		<dependency> 
+			<groupId>org.aspectj</groupId> 
+			<artifactId>aspectjweaver</artifactId> 
+			<version>${org.aspectj-version}</version> 
+		</dependency>
+		
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjtools</artifactId>
+			<version>${org.aspectj-version}</version>
+		</dependency>
 		
 		<!-- Logging -->
 		<dependency>
@@ -59,6 +71,19 @@
 			<version>${org.slf4j-version}</version>
 			<scope>runtime</scope>
 		</dependency>
+		
+		<!--logback  -->
+		  <dependency>
+		        <groupId>ch.qos.logback</groupId>
+		        <artifactId>logback-classic</artifactId>
+		        <version>1.1.2</version>
+		        <exclusions>
+		            <exclusion>
+		                <groupId>org.slf4j</groupId>
+		                <artifactId>slf4j-api</artifactId>
+		            </exclusion>
+		        </exclusions>
+		    </dependency>
 		<dependency>
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
@@ -183,8 +208,7 @@
 		    <artifactId>springfox-swagger2</artifactId>
 		    <version>2.4.0</version>
 		</dependency>
-		
-		
+			
 		<!-- springfox-swagger-ui -->
 		<dependency>
 		    <groupId>io.springfox</groupId>
@@ -192,7 +216,31 @@
 		    <version>2.4.0</version>
 		</dependency>
 		
+		<!-- https://mvnrepository.com/artifact/org.springframework/spring-aop -->
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-aop</artifactId>
+		    <version>${org.springframework-version}</version>
+		</dependency>
 		
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-tx</artifactId>
+			<version>${org.springframework-version}</version>
+		</dependency>		
+		
+		<!-- https://mvnrepository.com/artifact/org.springframework/spring-websocket -->
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-websocket</artifactId>
+		    <version>5.2.3.RELEASE</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>javax.websocket</groupId>
+			<artifactId>javax.websocket-api</artifactId>
+			<version>1.1</version>
+		</dependency>
 		
 	</dependencies>
 
@@ -232,16 +280,7 @@
                     <mainClass>org.test.int1.Main</mainClass>
                 </configuration>
             </plugin>
-            <!-- ??? -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-war-plugin</artifactId>
-                <version>3.2.0</version>
-                <configuration>
-                    <failOnMissingWebXml>false</failOnMissingWebXml>
-                </configuration>
-            </plugin>
-            
+
         </plugins>
     </build>
 </project>

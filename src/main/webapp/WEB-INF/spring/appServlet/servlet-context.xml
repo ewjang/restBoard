@@ -3,10 +3,14 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:beans="http://www.springframework.org/schema/beans"
 	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
 	xmlns:tx="http://www.springframework.org/schema/tx"
-	xsi:schemaLocation="http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
+	xmlns:websocket="http://www.springframework.org/schema/websocket"
+	xsi:schemaLocation="http://www.springframework.org/schema/websocket http://www.springframework.org/schema/websocket/spring-websocket-4.3.xsd
+		http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
 		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
 
 	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
@@ -32,6 +36,8 @@
 	
 	<context:component-scan base-package="com.jew" />
 	
+	
+	<!--Interceptor -->
 	<beans:bean id="authInterceptor" class="com.jew.comm.interceptor.AuthInterceptor"></beans:bean>
 	<beans:bean id="loginInterceptor" class="com.jew.comm.interceptor.LoginInterceptor"></beans:bean>
 	<beans:bean id="MemberInterceptor" class="com.jew.comm.interceptor.MemberInterceptor"></beans:bean>
@@ -54,5 +60,21 @@
 	
 	<!--ckeditor  -->
 	<resources location="/WEB-INF/views/ckeditor/" mapping="/ckeditor/**"></resources>
-	
+   
+  	<!--<aop:aspectj-autoproxy></aop:aspectj-autoproxy>  -->
+    <!--<tx:annotation-driven />  -->
+
+
+    <beans:bean id="logAop" class="com.jew.comm.aop.LoggerAspect"></beans:bean>
+    
+    <!--AOP  -->
+    <aop:config>
+    	<aop:aspect id="logger" ref="logAop">
+    		<aop:pointcut expression="within(com.jew.controller.*)" id="publicM"/>
+    		<aop:around pointcut-ref="publicM" method="startLog"/>
+    	</aop:aspect>
+    </aop:config> 
+    
+
+   
 </beans:beans>

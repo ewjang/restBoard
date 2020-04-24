@@ -45,20 +45,23 @@ public class MemberController {
 		return "member";
 	}
 	
-	@RequestMapping(value="/member/idchk/{userId}", method=RequestMethod.GET,  produces = "application/text; charset=utf8")
 	@ApiOperation(value="회원가입 아이디 중복 체크")
+	@RequestMapping(value="/member/idchk/{userId}", method=RequestMethod.GET,  produces = "application/text; charset=utf8")	
 	@ResponseBody
 	public String idChk(@PathVariable("userId") String userId) throws Exception{
 		
 		String temp=service.idChk(userId);
+		String a="";
 		
 		logger.info("체크확인 : " +temp);
 		if(temp==null) {
 			logger.info("사용 가능합니다.");
-			return "사용 가능합니다.";
+			a="사용 가능";
+			return a;
 		}else {
 			logger.info("이미 해당 아이디가 있습니다.");
-			return "이미 해당 아이디가 있습니다.";
+			a="사용 불가능";
+			return a;
 		}
 	}
 	

@@ -62,7 +62,7 @@
 			<button class="btn" style="color: white;background: green;">로그인</button>			
 		</form>
 			<hr>
-			<button class="btn" style="color: white;background: green;" onclick="location.href='/views/memberPageGo'">회원가입</button>	
+			<button class="btn" style="color: white;background: green;" onclick="location.href='/member/regist'">회원가입</button>	
 	</div>
 
 </body>
