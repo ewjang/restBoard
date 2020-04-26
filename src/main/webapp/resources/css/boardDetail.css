@@ -1,0 +1,43 @@
+@charset "UTF-8";
+
+.container{
+	margin-top : 80px;
+}
+
+.form-title{
+	width : 900px;
+}
+.form-content{
+	height : 400px;
+	width : 900px;
+	align-items :center;
+	margin-top : 10px;
+	overflow:auto;
+}
+
+.container-reply{
+	width : 900px;
+	background-color:silver;
+	justify-content:center;
+
+}
+
+.container-reply-1{
+	padding-top : 10px;
+	padding-left : 10px;
+	border-bottom: 1px solid black;
+}
+
+.form-reply-textarea{
+	padding-top : 5px;
+	padding-left : 10px;
+	width : 700px;
+	height : 40px;
+}
+
+.container-replay-2{
+	padding-top : 5px;
+	padding-left : 10px;
+	padding-bottom: 5px;
+	border-bottom: 1px solid black;
+}

@@ -1,6 +1,7 @@
 /**
- * 
+ * 아이디 중복체크 
  */
+
 $(document).ready(function(){
 	
 	$("#idChkBtn").on("click",function(){
@@ -31,7 +32,11 @@ $(document).ready(function(){
 		});
 	});
 	
-	$(function(){ 
+/**
+ * 비밀번호 일치 여부 
+ */	
+	
+$(function(){ 
 		 	$('#pw1').keyup(function(){
 		      $('#chkNotice').html('');
 		    });

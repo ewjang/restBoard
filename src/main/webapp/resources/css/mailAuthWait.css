@@ -1,0 +1,11 @@
+@charset "UTF-8";
+
+
+.main{
+	margin-top : 230px;
+	align-items : center;
+}
+
+.btn{
+	display :flex;
+}

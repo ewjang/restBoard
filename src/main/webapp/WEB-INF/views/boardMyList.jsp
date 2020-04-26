@@ -9,67 +9,12 @@
 <meta charset="UTF-8">
 <title>Board</title>
 
-	<style>
-		.nav{
-			height : 70px;
-			display : flex;
-			border-bottom : 1px solid black;
-			align-items : center;
-		}
-		
-		.nav-right-items{
-			margin-left : auto;
-			display :flex;
-		
-		}
-		
-		.nav-item{
-			margin-left : 10px;
-		}
-		
-		.container{
-			margin-top : 150px;
-		}
-		
-		#table {display: table; width: 75%;}
-		.row {display: table-row;}
-		.cell {display: table-cell; padding: 3px; border-bottom: 1px solid #DDD;}
-		.col1 { width: 5%;}
-		.col2 {width: 30%;}
-		.col3 {width: 5%;}
-		.col4 {width: 10%;}
-		.col5 {width: 10%;}
-		.col6 {width: 15%;}
-	</style>
+<link rel="stylesheet" href="/resources/css/boardMyList.css">
+
 </head>
 
 <body>
-	<h1 align="center">
-			jew's webBoard  
-	</h1>
-	
-	<div class="nav">
-		<div class="nav-right-items">	
-				<% if( session.getAttribute("loginUser")==null){ %>
-					<div class="nav-item">
-						<a href="/login" style="text-decoration:none">로그인</a>
-					</div>
-					<div class="nav-item">
-						<a href="/member/regist" style="text-decoration:none">회원가입</a>
-					</div>		
-				<% } else { %>
-					<div class="nav-item">
-						<a href="/logout" style="text-decoration:none">로그아웃</a>
-					</div>
-					<div class="nav-item">
-						<a href="/member/update/${loginUser.userId }" style="text-decoration:none">회원정보수정</a>
-					</div>
-					<div class="nav-item">
-						<a href="/board/list" style="text-decoration:none">게시판목록</a>
-					</div>
-				<%} %>
-		</div>	
-	</div>
+	<jsp:include page="header.jsp"></jsp:include>
 	
 	<h1 align="center">
 		나의 글 목록  

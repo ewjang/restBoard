@@ -8,40 +8,13 @@
 <meta charset="UTF-8">
 <title>Board Write</title>
 
-	<style>
-	</style>
 	
 	<script src = "${path}/ckeditor/ckeditor.js"></script>	
 	<link rel="stylesheet" href="/resources/css/boardUpdate.css">
 	
 </head>
 <body>
-	<h1 align="center">
-			jew's webBoard  
-	</h1>
-	
-	<div class="nav">
-		<div class="nav-right-items">	
-				<% if( session.getAttribute("loginUser")==null){ %>
-					<div class="nav-item">
-						<a href="/login" style="text-decoration:none">로그인</a>
-					</div>
-					<div class="nav-item">
-						<a href="/member/regist" style="text-decoration:none">회원가입</a>
-					</div>		
-				<% } else { %>
-					<div class="nav-item">
-						<a href="/logout" style="text-decoration:none">로그아웃</a>
-					</div>
-					<div class="nav-item">
-						<a href="/member/update/${loginUser.userId }" style="text-decoration:none">회원정보수정</a>
-					</div>
-					<div class="nav-item">
-						<a href="/board/list" style="text-decoration:none">게시판목록</a>
-					</div>
-				<%} %>
-		</div>	
-	</div>
+	<jsp:include page="header.jsp"></jsp:include>
 	
 	<h1 align="center">
 		글 수정  
@@ -51,6 +24,7 @@
 			<form action="/board/update/${update.boardNo}" method="POST">
 				
 				<div>
+					<input type="text" name="userId" value="${update.userId }" style="display: none">
 					<span>작성자 : ${update.userId }</span>
 					<span>등록일자 : ${update.regDate }</span>
 					<br/>

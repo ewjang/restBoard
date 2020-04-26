@@ -7,99 +7,25 @@
 <head>
 <meta charset="UTF-8">
 <title>Board Write</title>
+	
+	<script src="/resources/js/jQuery-2.1.4.min.js"></script>
 
-	<style>
-		.nav{
-			height : 70px;
-			display : flex;
-			border-bottom : 1px solid black;
-			align-items : center;
-		}
-		
-		.nav-right-items{
-			margin-left : auto;
-			display :flex;
-		
-		}
-		
-		.nav-item{
-			margin-left : 10px;
-		}
-		
-		.container{
-			margin-top : 80px;
-		}
-		
-		.form-title{
-			width : 900px;
-		}
-		.form-content{
-			height : 400px;
-			width : 900px;
-			align-items :center;
-			margin-top : 10px;
-			overflow:auto;
-		}
-		
-		.container-reply{
-			width : 900px;
-			background-color:silver;
-			margin-left : 500px;
-		}
-		
-		.container-reply-1{
-			padding-top : 10px;
-			padding-left : 10px;
-			border-bottom: 1px solid black;
-		}
-		
-		.form-reply-textarea{
-			padding-top : 5px;
-			padding-left : 10px;
-			width : 700px;
-			height : 40px;
-		}
-		
-		.container-replay-2{
-			padding-top : 5px;
-			padding-left : 10px;
-			padding-bottom: 5px;
-			border-bottom: 1px solid black;
-		}
-	</style>
+	<link rel="stylesheet" href="/resources/bootstrap/css/bootstrap.css">
+	<link rel="stylesheet" href="/resources/css/boardDetail.css">
+
 </head>
 <body>
-		<h1 align="center">
-			jew's webBoard  
-		</h1>
-
-	<div class="nav">
-		<div class="nav-right-items">	
-				<% if( session.getAttribute("loginUser")==null){ %>
-					<div class="nav-item">
-						<a href="/login" style="text-decoration:none">로그인</a>
-					</div>
-					<div class="nav-item">
-						<a href="/member/regist" style="text-decoration:none">회원가입</a>
-					</div>		
-				<% } else { %>
-					<div class="nav-item">
-						<a href="/logout" style="text-decoration:none">로그아웃</a>
-					</div>
-					<div class="nav-item">
-						<a href="/member/update/${loginUser.userId }" style="text-decoration:none">회원정보수정</a>
-					</div>
-					<div class="nav-item">
-						<a href="/board/list" style="text-decoration:none">게시판목록</a>
-					</div>
-				<%} %>
-		</div>	
-	</div>
+	
+	<jsp:include page="header.jsp"></jsp:include>
 	
 	<h1 align="center">
 		글 읽기  
 	</h1>
-
+	
+	<p id="boarduserid" style="display: none">${detail.userId }</p>
+	<p id="replyuserid" style="display: none">${loginUser.userId }</p>
+	
+	
 	<div class="container" align="center">
 		<div>
 			<span>작성자 : ${detail.userId }</span>
@@ -112,53 +38,90 @@
 		</div>	
 	</div>
 	
-	<div class="container-reply">
-		<form action="/board/reply/create/${detail.boardNo}" method="post">
-			<div class="container-reply-1">
-				<h6>${loginUser.userId}님의 Comment</h6>
-				<textarea class="form-reply-textarea" type="text" placeholder="댓글을 입력하세요." name="replyContent"></textarea>
-				<button>입력</button>
-			</div>
-		</form>
+	<div align="center">
+		<div class="container-reply">
+			<form action="/board/reply/create/${detail.boardNo}" method="post">
+				<div class="container-reply-1">
+					<h6>${loginUser.userId}님의 Comment</h6>
+					<textarea class="form-reply-textarea" type="text" placeholder="댓글을 입력하세요." name="replyContent"></textarea>
+					<button id="replyBtn">입력</button>
+				</div>
+			</form>
 		
-		
-		<c:forEach items="${rep}" var="reply">
-			<div class="container-replay-2">
-				<h6>${reply.userId}</h6>
-				<h6>${reply.regDate }</h6>
-				${reply.replyContent }
-				<c:if test="${loginUser.userId==reply.userId }">
-					<form action="/board/reply/delete/${detail.boardNo}/${reply.replyNo}" method="post">
-						<input type="hidden" name="_method" value="delete" />
-						<button type="submit">댓글 삭제</button>
-					</form>
-				</c:if>	
-				
-			</div>
-		</c:forEach>
+			<c:forEach items="${rep}" var="reply">
+				<div class="container-replay-2">
+					<h6>${reply.userId}</h6>
+					<h6>${reply.regDate }</h6>
+					${reply.replyContent }
+					<c:if test="${loginUser.userId==reply.userId }">
+						<form action="/board/reply/delete/${detail.boardNo}/${reply.replyNo}" method="post">
+							<input type="hidden" name="_method" value="delete" />
+							<button type="submit">댓글 삭제</button>
+						</form>
+					</c:if>	
+					
+				</div>
+			</c:forEach>
+		</div>
 	</div>
 	
 	 <div align="center">
-                    <table>
-						<tr>
-						    <c:if test="${pageMaker.prev}">
-						    <td>
-						        <a href='<c:url value="/board/detail/${detail.boardNo }?page=${pageMaker.startPage-1}"/>'>&laquo;</a>
-						    </td>
-						    </c:if>
-						    <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
-						    <td>
-						        <a href='<c:url value="/board/detail/${detail.boardNo }?page=${idx}"/>'>${idx}</a>
-						    </td>
-						    </c:forEach>
-						    <c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-						    <td>
-						        <a href='<c:url value="/board/detail/${detail.boardNo }?page=${pageMaker.endPage+1}"/>'>&raquo;</a>
-						    </td>
-						    </c:if>
-						</tr>
-					</table>
-             </div>	  
+      	<table>
+			<tr>
+			    <c:if test="${pageMaker.prev}">
+			    <td>
+			        <a href='<c:url value="/board/detail/${detail.boardNo }?page=${pageMaker.startPage-1}"/>'>&laquo;</a>
+			    </td>
+			    </c:if>
+			    <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
+			    <td>
+			        <a href='<c:url value="/board/detail/${detail.boardNo }?page=${idx}"/>'>${idx}</a>
+			    </td>
+			    </c:forEach>
+			    <c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+			    <td>
+			        <a href='<c:url value="/board/detail/${detail.boardNo }?page=${pageMaker.endPage+1}"/>'>&raquo;</a>
+			    </td>
+			    </c:if>
+			</tr>
+		</table>
+      </div>
+      <!--websocket 테스트 
+      <div class="well">
+      	<input type="text" id="msg" value="1212" class="form-control"/>
+      	<button id="btnSend">Send Message</button>
+      </div>
+   	   -->	
+   	
+	<script>
+	
+   	
+   	//댓글 작성시 게시판 글 작성자에게 알림 메시지 전달
+   	 
+
+   /*websocket 테스트
+   	*
+   	$('#btnSend').on('click', function(evt) {
+   		evt.preventDefault();
+   		if (socket.readyState !== 1)
+   			return;
+   		let msg = $('input#msg').val();
+   		socket.send(msg);
+   	});
+    */
+    
+   	$('#replyBtn').on('click',function(){
+   		var boardUserId=document.getElementById('boarduserid').innerText;
+   		var replyUserId=document.getElementById('replyuserid').innerText;
+   		var boardNo=${detail.boardNo};
+   		console.log("reply.js::socket>>",socket);
+		if(socket){
+			let socketMsg="reply,"+replyUserId+","+boardUserId+","+boardNo;
+			console.log("sssssssmsg>>",socketMsg);
+			socket.send(socketMsg);
+		}
+   	});
+	</script>
 	
 </body>
 </html>

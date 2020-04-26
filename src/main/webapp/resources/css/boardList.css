@@ -1,0 +1,15 @@
+@charset "UTF-8";
+
+.container{
+	margin-top : 150px;
+}
+
+#table {display: table; width: 75%;}
+.row {display: table-row;}
+.cell {display: table-cell; padding: 3px; border-bottom: 1px solid #DDD;}
+.col1 { width: 5%;}
+.col2 {width: 30%;}
+.col3 {width: 5%;}
+.col4 {width: 10%;}
+.col5 {width: 10%;}
+.col6 {width: 15%;}

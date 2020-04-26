@@ -124,18 +124,27 @@ public class BoardController implements SessionKeys{
 	
 	@RequestMapping(value="/board/update/{boardNo}" ,method=RequestMethod.PUT)
 	@ApiOperation(value="게시판 글 수정")
-	public String update(Board board) throws Exception {	
+	public String update(Board board) throws Exception {
+		
+		logger.info("boarduserid : "+board.getUserId());
+		logger.info("boardno : "+board.getBoardNo());
+		logger.info("boardtitle : "+board.getBoardTitle());
+		logger.info("boardcontent : "+board.getBoardContent());
+		
 		service.update(board);
 		return "redirect:/board/list";
 	}
 	
 	@RequestMapping(value="/board/update/{boardNo}" ,method=RequestMethod.GET)
 	@ApiOperation(value="게시판 글 수정 화면")
-	public ModelAndView updDetail(@PathVariable("boardNo") int boardNo) throws Exception {
+	public ModelAndView updDetail(@PathVariable("boardNo") int boardNo , Board board) throws Exception {
 		logger.info("board update  . . . ");	
+		
+		board=service.detail(boardNo);
+		
 		ModelAndView mav=new ModelAndView();
 		mav.setViewName("boardUpdate");
-		mav.addObject("update", service.detail(boardNo));
+		mav.addObject("update", board);
 		return mav;
 	}
 	
@@ -169,7 +178,7 @@ public class BoardController implements SessionKeys{
 	}
 	@RequestMapping(value="/board/detail/{boardNo}" ,method=RequestMethod.GET)
 	@ApiOperation(value="게시판 글 상세보기")
-	public ModelAndView detail(@PathVariable("boardNo") int boardNo, Criteria cri) throws Exception {
+	public ModelAndView detail(@PathVariable("boardNo") int boardNo,Criteria cri) throws Exception {
 		logger.info("board detail page");
 		logger.info("boardNo : "+boardNo);
 		
@@ -185,11 +194,12 @@ public class BoardController implements SessionKeys{
 		mav.addObject("detail",service.detail(boardNo));
 		mav.addObject("rep", service.replyList(rp, cri));
 		mav.addObject("pageMaker", pageMaker);
+	
 		return mav;
 	}
 	@RequestMapping(value="/board/reply/create/{boardNo}", method=RequestMethod.POST)
 	@ApiOperation(value="댓글 작성")
-	public String create(@PathVariable int boardNo ,Reply reply, HttpSession https) throws Exception{
+	public String create(@PathVariable int boardNo ,Reply reply, HttpSession https, Model model) throws Exception{
 		
 		logger.info("board reply create . . .");
 		logger.info("reply content : "+reply.getReplyContent());
@@ -198,6 +208,7 @@ public class BoardController implements SessionKeys{
 		reply.setUserId(member.getUserId());
 		reply.setBoardNo(boardNo);
 		service.replyWrite(reply);
+		
 		return "redirect:/board/detail/"+boardNo;
 	}
 	

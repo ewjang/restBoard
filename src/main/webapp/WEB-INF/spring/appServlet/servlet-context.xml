@@ -75,6 +75,15 @@
     	</aop:aspect>
     </aop:config> 
     
-
+    <!-- websocket handler  -->
+    <beans:bean id="replyEchoHandler" class="com.jew.swp.handler.ReplyEchoHandler"/>
+    
+    <websocket:handlers>
+    	<websocket:mapping handler="replyEchoHandler" path="/replyEcho"/>
+    	<websocket:handshake-interceptors>
+    		<beans:bean
+    			class="org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor"></beans:bean>
+    	</websocket:handshake-interceptors>
+    </websocket:handlers>
    
 </beans:beans>
