@@ -10,7 +10,6 @@
 <title>Board</title>
 	
 	<script src="/resources/js/jQuery-2.1.4.min.js"></script>
-	<link rel="stylesheet" href="/resources/bootstrap/css/bootstrap.css">
 	<link rel="stylesheet" href="/resources/css/boardList.css">
 </head>
 
@@ -46,7 +45,6 @@
 								<form action="/board/delete/${board.boardNo}" method="POST">
 									<input type="hidden" name="_method" value="delete"/>
 									<input id="delBtn" type="submit" style="color: white;background: red;" value="삭제"/>
-								<!--<button id="delBtn" style="color: white;background: red;">삭제</button> -->
 								</form>
 							</c:if>
 							</span>

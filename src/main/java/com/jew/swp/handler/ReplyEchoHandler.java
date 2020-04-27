@@ -23,14 +23,14 @@ public class ReplyEchoHandler extends TextWebSocketHandler{
 	/**
 	 * 모든 유저의 정보가 들어있다.
 	 */
-	List<WebSocketSession> sessions=new ArrayList<>();
+	//List<WebSocketSession> sessions=new ArrayList<>();
 	
 	Map<String,WebSocketSession> userSessions=new HashMap<>();
 	
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
 		logger.info("afterConnectionEstablished :"+session);
-		sessions.add(session);
+		//sessions.add(session);
 		String senderId=getId(session);
 		userSessions.put(senderId, session);
 	}
@@ -38,7 +38,7 @@ public class ReplyEchoHandler extends TextWebSocketHandler{
 	@Override
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
 		logger.info("handleTextMessage : "+session+" : "+message);
-		String senderId=getId(session);
+		//String senderId=getId(session);
 		
 		/**
 		 * 모든 유저에게 브로드캐스팅
@@ -54,7 +54,7 @@ public class ReplyEchoHandler extends TextWebSocketHandler{
 		if(StringUtils.isNullOrEmpty(msg)) {
 			
 		}else {
-			String[] strs=message.getPayload().split(",");
+			String[] strs=msg.split(",");
 			if(strs!=null&&strs.length==4) {
 				String cmd=strs[0];
 				String replyWriter=strs[1];
@@ -63,7 +63,7 @@ public class ReplyEchoHandler extends TextWebSocketHandler{
 				
 				WebSocketSession boardWriterSession= userSessions.get(boardWriter); 
 				if("reply".equals(cmd) && boardWriterSession!=null) {
-					TextMessage tmpMsg= new TextMessage(replyWriter+"님이 "+bno+"번 게시글에 댓글을 작성했습니다.");
+					TextMessage tmpMsg= new TextMessage(replyWriter+"님이 "+"<a href='/board/detail/"+bno+"'>"+ bno+"</a> 번 게시글에 댓글을 작성했습니다.");
 					boardWriterSession.sendMessage(tmpMsg);
 					logger.info("boardWriterSession.sendMessage : "+tmpMsg);
 				}

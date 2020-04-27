@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 	
 	<link rel="stylesheet" href="/resources/css/header.css">
-
+	<link rel="stylesheet" href="/resources/bootstrap/css/bootstrap.css">
 </head>
 <body>
 	<div id="socketAlert" class="alert alert-primary" role="alert" style="display: none;">
@@ -62,7 +62,7 @@
    		ws.onmessage = function(event) {
    			console.log("ReceiveMessage : " + event.data + '\n');
    			let $socketAlert = $('div#socketAlert');
-   			$socketAlert.text(event.data);
+   			$socketAlert.html(event.data);
    			$socketAlert.css('display','block');
    		};
 
